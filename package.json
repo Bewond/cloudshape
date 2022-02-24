@@ -1,13 +1,18 @@
 {
   "name": "cloudshape",
   "description": "Cloudshape enables infrastructure as code through a collection of powerful constructs that are easy to use and extend.",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "build": "tsc -b",
+    "watch": "tsc -b -w",
     "clean": "tsc -b --clean",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --fix --ext .js,.ts",
     "format": "prettier . --write",
-    "test": "jest --coverage"
+    "test": "jest --coverage --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bewond/cloudshape.git"
   },
   "packageManager": "yarn@3.2.0",
   "devDependencies": {
@@ -20,6 +25,7 @@
     "aws-cdk-lib": "^2.13.0",
     "constructs": "^10.0.71",
     "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-jest": "^26.1.1",
     "jest": "^27.5.1",
     "prettier": "2.5.1",

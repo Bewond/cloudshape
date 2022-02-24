@@ -10,6 +10,12 @@
 !.yarn/cache
 #.pnp.*
 
+# Test coverage
+coverage
+
+# TypeScript
+dist
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
