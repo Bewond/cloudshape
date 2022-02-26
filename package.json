@@ -15,6 +15,11 @@
     "url": "https://github.com/bewond/cloudshape.git"
   },
   "packageManager": "yarn@3.2.0",
+  "workspaces": [
+    "packages/constructs",
+    "packages/core",
+    "packages/services/*"
+  ],
   "devDependencies": {
     "@tsconfig/node16-strictest-esm": "^1.0.0",
     "@types/eslint": "^8",
