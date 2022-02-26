@@ -47,8 +47,32 @@ Response:
   "accessToken": "String",
   "tokenType": "String",
   "expiresIn": "String",
-  "refreshToken": "String",
-  "idToken": "String"
+  "idToken": "String",
+  "refreshToken": "String"
+}
+```
+
+### `PUT /users/auth/refresh`
+
+Use the refresh token to retrieve new ID and access tokens.
+
+Request:
+
+```json
+{
+  "refreshToken": "String"
+}
+```
+
+Response:
+
+```json
+{
+  "accessToken": "String",
+  "tokenType": "String",
+  "expiresIn": "String",
+  "idToken": "String",
+  "refreshToken": "String"
 }
 ```
 
