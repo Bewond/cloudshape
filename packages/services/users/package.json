@@ -1,8 +1,9 @@
 {
-  "name": "users",
+  "name": "@cloudshape-services/users",
   "packageManager": "yarn@3.2.0",
   "dependencies": {
-    "constructs": "workspace:*",
-    "core": "workspace:*"
+    "@cloudshape/constructs": "workspace:^",
+    "@cloudshape/core": "workspace:^",
+    "constructs": "^10.0.73"
   }
 }

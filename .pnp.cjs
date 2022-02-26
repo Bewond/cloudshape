@@ -21,30 +21,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
-        "name": "constructs",\
+        "name": "@cloudshape/constructs",\
         "reference": "workspace:packages/constructs"\
       },\
       {\
-        "name": "core",\
+        "name": "@cloudshape/core",\
         "reference": "workspace:packages/core"\
       },\
       {\
-        "name": "chat",\
+        "name": "@cloudshape-services/chat",\
         "reference": "workspace:packages/services/chat"\
       },\
       {\
-        "name": "users",\
+        "name": "@cloudshape-services/users",\
         "reference": "workspace:packages/services/users"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["chat", ["workspace:packages/services/chat"]],\
-      ["cloudshape", ["workspace:."]],\
-      ["constructs", ["workspace:packages/constructs"]],\
-      ["core", ["workspace:packages/core"]],\
-      ["users", ["workspace:packages/services/users"]]\
+      ["@cloudshape-services/chat", ["workspace:packages/services/chat"]],\
+      ["@cloudshape-services/users", ["workspace:packages/services/users"]],\
+      ["@cloudshape/constructs", ["workspace:packages/constructs"]],\
+      ["@cloudshape/core", ["workspace:packages/core"]],\
+      ["cloudshape", ["workspace:."]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -53,7 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@tsconfig/node16-strictest-esm", "npm:1.0.0"],\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.1"],\
             ["@types/prettier", "npm:2.4.4"],\
@@ -839,6 +839,45 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@cloudshape-services/chat", [\
+        ["workspace:packages/services/chat", {\
+          "packageLocation": "./packages/services/chat/",\
+          "packageDependencies": [\
+            ["@cloudshape-services/chat", "workspace:packages/services/chat"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@cloudshape-services/users", [\
+        ["workspace:packages/services/users", {\
+          "packageLocation": "./packages/services/users/",\
+          "packageDependencies": [\
+            ["@cloudshape-services/users", "workspace:packages/services/users"],\
+            ["@cloudshape/constructs", "workspace:packages/constructs"],\
+            ["@cloudshape/core", "workspace:packages/core"],\
+            ["constructs", "npm:10.0.73"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@cloudshape/constructs", [\
+        ["workspace:packages/constructs", {\
+          "packageLocation": "./packages/constructs/",\
+          "packageDependencies": [\
+            ["@cloudshape/constructs", "workspace:packages/constructs"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@cloudshape/core", [\
+        ["workspace:packages/core", {\
+          "packageLocation": "./packages/core/",\
+          "packageDependencies": [\
+            ["@cloudshape/core", "workspace:packages/core"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@eslint/eslintrc", [\
         ["npm:1.1.0", {\
           "packageLocation": "./.yarn/cache/@eslint-eslintrc-npm-1.1.0-66eebb2bc3-784aa2157e.zip/node_modules/@eslint/eslintrc/",\
@@ -1249,11 +1288,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@tsconfig/node16-strictest-esm", [\
+      ["@tsconfig/node16-strictest", [\
         ["npm:1.0.0", {\
-          "packageLocation": "./.yarn/cache/@tsconfig-node16-strictest-esm-npm-1.0.0-db358de549-403978500f.zip/node_modules/@tsconfig/node16-strictest-esm/",\
+          "packageLocation": "./.yarn/cache/@tsconfig-node16-strictest-npm-1.0.0-1485062da2-58cb51370c.zip/node_modules/@tsconfig/node16-strictest/",\
           "packageDependencies": [\
-            ["@tsconfig/node16-strictest-esm", "npm:1.0.0"]\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2216,15 +2255,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["chat", [\
-        ["workspace:packages/services/chat", {\
-          "packageLocation": "./packages/services/chat/",\
-          "packageDependencies": [\
-            ["chat", "workspace:packages/services/chat"]\
-          ],\
-          "linkType": "SOFT"\
-        }]\
-      ]],\
       ["chownr", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/chownr-npm-2.0.0-638f1c9c61-c57cf9dd07.zip/node_modules/chownr/",\
@@ -2278,7 +2308,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["cloudshape", "workspace:."],\
-            ["@tsconfig/node16-strictest-esm", "npm:1.0.0"],\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.1"],\
             ["@types/prettier", "npm:2.4.4"],\
@@ -2393,12 +2423,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["workspace:packages/constructs", {\
-          "packageLocation": "./packages/constructs/",\
+        ["npm:10.0.73", {\
+          "packageLocation": "./.yarn/cache/constructs-npm-10.0.73-a184989aa8-d4c7bc750e.zip/node_modules/constructs/",\
           "packageDependencies": [\
-            ["constructs", "workspace:packages/constructs"]\
+            ["constructs", "npm:10.0.73"]\
           ],\
-          "linkType": "SOFT"\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["convert-source-map", [\
@@ -2409,15 +2439,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["safe-buffer", "npm:5.1.2"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["core", [\
-        ["workspace:packages/core", {\
-          "packageLocation": "./packages/core/",\
-          "packageDependencies": [\
-            ["core", "workspace:packages/core"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]],\
       ["cross-spawn", [\
@@ -5806,17 +5827,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["punycode", "npm:2.1.1"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["users", [\
-        ["workspace:packages/services/users", {\
-          "packageLocation": "./packages/services/users/",\
-          "packageDependencies": [\
-            ["users", "workspace:packages/services/users"],\
-            ["constructs", "workspace:packages/constructs"],\
-            ["core", "workspace:packages/core"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]],\
       ["util-deprecate", [\

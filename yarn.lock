@@ -407,6 +407,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cloudshape-services/chat@workspace:packages/services/chat":
+  version: 0.0.0-use.local
+  resolution: "@cloudshape-services/chat@workspace:packages/services/chat"
+  languageName: unknown
+  linkType: soft
+
+"@cloudshape-services/users@workspace:packages/services/users":
+  version: 0.0.0-use.local
+  resolution: "@cloudshape-services/users@workspace:packages/services/users"
+  dependencies:
+    "@cloudshape/constructs": "workspace:^"
+    "@cloudshape/core": "workspace:^"
+    constructs: ^10.0.73
+  languageName: unknown
+  linkType: soft
+
+"@cloudshape/constructs@workspace:^, @cloudshape/constructs@workspace:packages/constructs":
+  version: 0.0.0-use.local
+  resolution: "@cloudshape/constructs@workspace:packages/constructs"
+  languageName: unknown
+  linkType: soft
+
+"@cloudshape/core@workspace:^, @cloudshape/core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@cloudshape/core@workspace:packages/core"
+  languageName: unknown
+  linkType: soft
+
 "@eslint/eslintrc@npm:^1.1.0":
   version: 1.1.0
   resolution: "@eslint/eslintrc@npm:1.1.0"
@@ -766,10 +794,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node16-strictest-esm@npm:^1.0.0":
+"@tsconfig/node16-strictest@npm:^1.0.0":
   version: 1.0.0
-  resolution: "@tsconfig/node16-strictest-esm@npm:1.0.0"
-  checksum: 403978500f596a879b2c2e1808571962b2f2d533886a470be6fb35932359999bcab2584e94d16f89067d142b174bc25cc5e61f8975578aee39b4916db601f707
+  resolution: "@tsconfig/node16-strictest@npm:1.0.0"
+  checksum: 58cb51370cdffa2f97a56ae8765d74e1166108b7994630624cb09150e371097a1d006f96ee45077dcd5c830fb6969a6e78c09fb0e2c6f8a7d02703db5519a286
   languageName: node
   linkType: hard
 
@@ -1490,12 +1518,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chat@workspace:packages/services/chat":
-  version: 0.0.0-use.local
-  resolution: "chat@workspace:packages/services/chat"
-  languageName: unknown
-  linkType: soft
-
 "chownr@npm:^2.0.0":
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
@@ -1539,7 +1561,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cloudshape@workspace:."
   dependencies:
-    "@tsconfig/node16-strictest-esm": ^1.0.0
+    "@tsconfig/node16-strictest": ^1.0.0
     "@types/eslint": ^8
     "@types/jest": ^27.4.1
     "@types/prettier": ^2
@@ -1644,11 +1666,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constructs@workspace:*, constructs@workspace:packages/constructs":
-  version: 0.0.0-use.local
-  resolution: "constructs@workspace:packages/constructs"
-  languageName: unknown
-  linkType: soft
+"constructs@npm:^10.0.73":
+  version: 10.0.73
+  resolution: "constructs@npm:10.0.73"
+  checksum: d4c7bc750e424327feed683e108a65b3bc79980a05956bd581ad104c1cfd208f8ca532fc71731dfb72de0abb4a202e5ebc123c05657ad9694d1db1a3bc0436be
+  languageName: node
+  linkType: hard
 
 "convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.8.0
@@ -1658,12 +1681,6 @@ __metadata:
   checksum: 985d974a2d33e1a2543ada51c93e1ba2f73eaed608dc39f229afc78f71dcc4c8b7d7c684aa647e3c6a3a204027444d69e53e169ce94e8d1fa8d7dee80c9c8fed
   languageName: node
   linkType: hard
-
-"core@workspace:*, core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "core@workspace:packages/core"
-  languageName: unknown
-  linkType: soft
 
 "cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
@@ -4607,15 +4624,6 @@ __metadata:
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
   languageName: node
   linkType: hard
-
-"users@workspace:packages/services/users":
-  version: 0.0.0-use.local
-  resolution: "users@workspace:packages/services/users"
-  dependencies:
-    constructs: "workspace:*"
-    core: "workspace:*"
-  languageName: unknown
-  linkType: soft
 
 "util-deprecate@npm:^1.0.1":
   version: 1.0.2

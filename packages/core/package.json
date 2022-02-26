@@ -1,4 +1,4 @@
 {
-  "name": "core",
+  "name": "@cloudshape/core",
   "packageManager": "yarn@3.2.0"
 }

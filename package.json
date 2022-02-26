@@ -21,7 +21,7 @@
     "packages/services/*"
   ],
   "devDependencies": {
-    "@tsconfig/node16-strictest-esm": "^1.0.0",
+    "@tsconfig/node16-strictest": "^1.0.0",
     "@types/eslint": "^8",
     "@types/jest": "^27.4.1",
     "@types/prettier": "^2",

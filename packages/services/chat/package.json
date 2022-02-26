@@ -1,4 +1,4 @@
 {
-  "name": "chat",
+  "name": "@cloudshape-services/chat",
   "packageManager": "yarn@3.2.0"
 }

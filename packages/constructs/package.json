@@ -1,4 +1,4 @@
 {
-  "name": "constructs",
+  "name": "@cloudshape/constructs",
   "packageManager": "yarn@3.2.0"
 }
