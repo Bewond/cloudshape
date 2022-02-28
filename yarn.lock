@@ -419,13 +419,18 @@ __metadata:
   dependencies:
     "@cloudshape/constructs": "workspace:^"
     "@cloudshape/core": "workspace:^"
-    constructs: ^10.0.73
+  peerDependencies:
+    aws-cdk-lib: "*"
+    constructs: "*"
   languageName: unknown
   linkType: soft
 
 "@cloudshape/constructs@workspace:^, @cloudshape/constructs@workspace:packages/constructs":
   version: 0.0.0-use.local
   resolution: "@cloudshape/constructs@workspace:packages/constructs"
+  peerDependencies:
+    aws-cdk-lib: "*"
+    constructs: "*"
   languageName: unknown
   linkType: soft
 
@@ -435,9 +440,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@eslint/eslintrc@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@eslint/eslintrc@npm:1.1.0"
+"@eslint/eslintrc@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@eslint/eslintrc@npm:1.2.0"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
@@ -448,7 +453,7 @@ __metadata:
     js-yaml: ^4.1.0
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
-  checksum: 784aa2157e2808b52bbbaf1d1cfca9a6ba0b2faaa3696eb7a1229d4b357400fbd8a6aa09a16e7ae0868ea075d3a8f365cf5928b6d05a1df47f40a1167423a4fa
+  checksum: a5e51dcf02627363567094456d7880b46b6a14a285d7a057f083ca903bdd862483bb6314cbc9fb6fa2d2c4537d50e0d28bd5e39650840241ae4796faaec65d2e
   languageName: node
   linkType: hard
 
@@ -910,7 +915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^17.0.21":
   version: 17.0.21
   resolution: "@types/node@npm:17.0.21"
   checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
@@ -1270,8 +1275,8 @@ __metadata:
   linkType: hard
 
 "aws-cdk-lib@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "aws-cdk-lib@npm:2.13.0"
+  version: 2.14.0
+  resolution: "aws-cdk-lib@npm:2.14.0"
   dependencies:
     "@balena/dockerignore": ^1.0.2
     case: 1.6.3
@@ -1284,7 +1289,7 @@ __metadata:
     yaml: 1.10.2
   peerDependencies:
     constructs: ^10.0.0
-  checksum: b7de64944a033b01195846a1cbeabf36236b398a39c9639d935cdd9ef33fdf7195594ccc2c8207520c9648256d81ad49f9069811f3d0e02ee80ec1842c46991d
+  checksum: a62353bd4e4d8b896ad06c771216b9773ea6f15420be0b5aacafd06c8bfc3cb8b92b25424c7007c6268871cd6141d446255cb4a1b01df1f3fd909d3fc479c154
   languageName: node
   linkType: hard
 
@@ -1564,6 +1569,7 @@ __metadata:
     "@tsconfig/node16-strictest": ^1.0.0
     "@types/eslint": ^8
     "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
     "@types/prettier": ^2
     "@typescript-eslint/eslint-plugin": ^5.12.1
     "@typescript-eslint/parser": ^5.12.1
@@ -1660,16 +1666,9 @@ __metadata:
   linkType: hard
 
 "constructs@npm:^10.0.71":
-  version: 10.0.71
-  resolution: "constructs@npm:10.0.71"
-  checksum: 08fd071bda0a8e9c35cf96c9101a55ff5ee363c64a136c86e59dfa852aa73e61591feaa49ed4f85e3addc25f0384be674cb508d852e82eadc1e02434f0fa4a91
-  languageName: node
-  linkType: hard
-
-"constructs@npm:^10.0.73":
-  version: 10.0.73
-  resolution: "constructs@npm:10.0.73"
-  checksum: d4c7bc750e424327feed683e108a65b3bc79980a05956bd581ad104c1cfd208f8ca532fc71731dfb72de0abb4a202e5ebc123c05657ad9694d1db1a3bc0436be
+  version: 10.0.74
+  resolution: "constructs@npm:10.0.74"
+  checksum: 70902ecf24121c39f5b62f3614a7e5126b4aa6ed9ec27122dfc35bfaf9f65e5d080cf188766cde3ca0d7ec89fe2176ac38579db33598933c9e3775a3bd0fa217
   languageName: node
   linkType: hard
 
@@ -1830,9 +1829,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.71":
-  version: 1.4.72
-  resolution: "electron-to-chromium@npm:1.4.72"
-  checksum: c5eba9f7a06189028652714942e47fad3006a9d8997444708301d1f24dfb3e5ce4ef5b038ed55a29aab8402d2b5a7022db50e02b72c24c98d5924b0f496fc16a
+  version: 1.4.73
+  resolution: "electron-to-chromium@npm:1.4.73"
+  checksum: 8a76418455bb697a4a3488a8a880fd2573bf8db4e007b683daadba9b9c12c092f53829a0d6a3e4460b008e9eb7ee1eddc219bf01f358e47c2d00175945f3cfb9
   languageName: node
   linkType: hard
 
@@ -2003,10 +2002,10 @@ __metadata:
   linkType: hard
 
 "eslint@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "eslint@npm:8.9.0"
+  version: 8.10.0
+  resolution: "eslint@npm:8.10.0"
   dependencies:
-    "@eslint/eslintrc": ^1.1.0
+    "@eslint/eslintrc": ^1.2.0
     "@humanwhocodes/config-array": ^0.9.2
     ajv: ^6.10.0
     chalk: ^4.0.0
@@ -2043,7 +2042,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: 8efecdb9752ee6cb4d2787a14e00cbeab29562ed95dd71c6f3f8ac410426a067d5aa659416d2290e46ca44bc5607e6a6e6c62f814694d8639f80666f522022a7
+  checksum: 8b31ab3de5b48b6828bf13c09c9e62ee0045fa0afa017efaa73eedcf4dc33bc204ee4c467d4677e37967d1645f73816ddef4271422e691fded352040f8f83093
   languageName: node
   linkType: hard
 

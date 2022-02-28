@@ -1,4 +1,9 @@
 {
   "name": "@cloudshape/constructs",
-  "packageManager": "yarn@3.2.0"
+  "main": "src/index.ts",
+  "packageManager": "yarn@3.2.0",
+  "peerDependencies": {
+    "aws-cdk-lib": "*",
+    "constructs": "*"
+  }
 }

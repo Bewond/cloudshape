@@ -3,7 +3,10 @@
   "packageManager": "yarn@3.2.0",
   "dependencies": {
     "@cloudshape/constructs": "workspace:^",
-    "@cloudshape/core": "workspace:^",
-    "constructs": "^10.0.73"
+    "@cloudshape/core": "workspace:^"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "*",
+    "constructs": "*"
   }
 }
