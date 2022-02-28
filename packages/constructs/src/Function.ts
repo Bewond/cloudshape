@@ -16,6 +16,17 @@ export interface FunctionProps {
    * @default handler
    */
   readonly handler?: string;
+
+  /**
+   * Use environment variables to apply configuration changes, such
+   * as test and production environment configurations, without changing your
+   * Lambda function source code.
+   *
+   * @default - No environment variables.
+   */
+  readonly environment?: {
+    [key: string]: string;
+  };
 }
 
 /**
@@ -23,9 +34,6 @@ export interface FunctionProps {
  */
 export class Function extends lambda.NodejsFunction {
   constructor(scope: Construct, id: string, props: FunctionProps) {
-    super(scope, id, {
-      entry: props.entry,
-      handler: props.handler ?? "handler",
-    });
+    super(scope, id, props);
   }
 }

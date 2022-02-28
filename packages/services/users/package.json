@@ -3,9 +3,12 @@
   "packageManager": "yarn@3.2.0",
   "dependencies": {
     "@cloudshape/constructs": "workspace:^",
-    "@cloudshape/core": "workspace:^"
+    "@cloudshape/core": "workspace:^",
+    "aws-sdk": "^2.1083.0",
+    "crypto-secure-random-digit": "^1.0.10"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.92",
     "aws-cdk-lib": "^2.14.0",
     "constructs": "^10.0.74"
   },
