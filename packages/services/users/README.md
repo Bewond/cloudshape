@@ -76,6 +76,18 @@ Response:
 }
 ```
 
+### `POST /users/auth/out`
+
+User logout from all sessions.
+
+Request:
+
+```json
+{
+  "accessToken": "String"
+}
+```
+
 ### `GET /users`
 
 Get authenticated user.
