@@ -1,5 +1,6 @@
 import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
 import type { Construct } from "constructs";
+import { PermissionsMixin } from "./Permissions";
 
 /**
  * The properties for the Function construct.
@@ -32,7 +33,7 @@ export interface FunctionProps {
 /**
  * @summary Nodejs AWS Lambda function construct.
  */
-export class Function extends lambda.NodejsFunction {
+export class Function extends PermissionsMixin(lambda.NodejsFunction) {
   constructor(scope: Construct, id: string, props: FunctionProps) {
     super(scope, id, {
       ...props,
@@ -40,5 +41,7 @@ export class Function extends lambda.NodejsFunction {
       handler: props.handler ?? "handler",
       environment: props.environment ?? {},
     });
+
+    this.initializeMixin(this.role!, this, `${id}PermissionsPolicy`);
   }
 }

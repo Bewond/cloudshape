@@ -1,4 +1,4 @@
-import { Auth, Function } from "@cloudshape/constructs";
+import { Auth, Function, Output } from "@cloudshape/constructs";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -48,6 +48,23 @@ export class UsersService extends Construct {
   constructor(scope: Construct, id: string, props: UsersServiceProps) {
     super(scope, id);
 
+    const authUserPool = this.setupUserPool(props);
+
+    const authUserPoolClient = authUserPool.addClient("authUserPoolClient", {
+      authFlows: { custom: true },
+    });
+
+    new Output(this, "userPoolId", {
+      value: authUserPool.userPoolId,
+      description: "Auth Service userPoolId",
+    });
+    new Output(this, "userPoolClientId", {
+      value: authUserPoolClient.userPoolClientId,
+      description: "Auth Service userPoolClientId",
+    });
+  }
+
+  private setupUserPool(props: UsersServiceProps): Auth {
     // This function tracks the custom authentication flow, determines which challenges
     // should be presented to the user in which order. At the end, it reports back to the user pool
     // if the user succeeded or failed authentication.
@@ -71,6 +88,12 @@ export class UsersService extends Construct {
           </body></html>`,
       },
     });
+    createChallengeFunction.attachPermissions([
+      {
+        actions: ["ses:SendEmail", "ses:SendRawEmail"],
+        resources: ["*"],
+      },
+    ]);
 
     // This function is invoked by the user pool when the user
     // provides the answer to the challenge to determine if that answer is correct.
@@ -83,7 +106,7 @@ export class UsersService extends Construct {
       entry: path.join(__dirname, `/triggers/pre-auth.ts`),
     });
 
-    const authUserPool = new Auth(this, "", {
+    return new Auth(this, "authUserPool", {
       selfSignUpEnabled: true,
       lambdaTriggers: {
         defineAuthChallenge: defineChallengeFunction,
