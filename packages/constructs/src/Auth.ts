@@ -44,8 +44,8 @@ export interface AuthProps {
 /**
  * @summary AWS Cognito UserPool construct.
  */
-export class Function extends cognito.UserPool {
-  constructor(scope: Construct, id: string, props: AuthProps) {
+export class Auth extends cognito.UserPool {
+  constructor(scope: Construct, id: string, props: AuthProps = {}) {
     super(scope, id, {
       ...props,
       selfSignUpEnabled: props.selfSignUpEnabled ?? false,

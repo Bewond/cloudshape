@@ -1,4 +1,4 @@
-import { Function } from "@cloudshape/constructs";
+import { Auth, Function } from "@cloudshape/constructs";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -52,13 +52,13 @@ export class UsersService extends Construct {
     // should be presented to the user in which order. At the end, it reports back to the user pool
     // if the user succeeded or failed authentication.
     const defineChallengeFunction = new Function(this, "defineChallengeFunction", {
-      entry: path.join(__dirname, `/functions/define-challenge.ts`),
+      entry: path.join(__dirname, `/triggers/define-challenge.ts`),
     });
 
     // This function is invoked to create a unique challenge for the user.
     // Generate a one-time login code and mail it to the user.
     const createChallengeFunction = new Function(this, "createChallengeFunction", {
-      entry: path.join(__dirname, `/functions/create-challenge.ts`),
+      entry: path.join(__dirname, `/triggers/create-challenge.ts`),
       environment: {
         emailSource: props.emailSource,
         messageSubject: props.messageSubject ?? `Your secret login code`,
@@ -75,12 +75,22 @@ export class UsersService extends Construct {
     // This function is invoked by the user pool when the user
     // provides the answer to the challenge to determine if that answer is correct.
     const verifyChallengeFunction = new Function(this, "verifyChallengeFunction", {
-      entry: path.join(__dirname, `/functions/verify-challenge.ts`),
+      entry: path.join(__dirname, `/triggers/verify-challenge.ts`),
     });
 
     // This function auto-confirms users and their email addresses during signup.
     const preAuthFunction = new Function(this, "preAuthFunction", {
-      entry: path.join(__dirname, `/functions/pre-auth.ts`),
+      entry: path.join(__dirname, `/triggers/pre-auth.ts`),
+    });
+
+    const authUserPool = new Auth(this, "", {
+      selfSignUpEnabled: true,
+      lambdaTriggers: {
+        defineAuthChallenge: defineChallengeFunction,
+        createAuthChallenge: createChallengeFunction,
+        verifyAuthChallengeResponse: verifyChallengeFunction,
+        preAuthentication: preAuthFunction,
+      },
     });
   }
 }
