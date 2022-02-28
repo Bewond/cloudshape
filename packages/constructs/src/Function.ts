@@ -34,6 +34,11 @@ export interface FunctionProps {
  */
 export class Function extends lambda.NodejsFunction {
   constructor(scope: Construct, id: string, props: FunctionProps) {
-    super(scope, id, props);
+    super(scope, id, {
+      ...props,
+      entry: props.entry,
+      handler: props.handler ?? "handler",
+      environment: props.environment ?? {},
+    });
   }
 }

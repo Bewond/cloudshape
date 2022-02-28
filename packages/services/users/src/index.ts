@@ -7,6 +7,11 @@ import * as path from "path";
  */
 export interface UsersServiceProps {
   /**
+   * Email source address.
+   */
+  readonly emailSource: string;
+
+  /**
    * Subject of the message containing the user secret code.
    *
    * @default "Your secret login code"
@@ -40,7 +45,7 @@ export class UsersService extends Construct {
    * @param {string} id - this is a scope-unique id.
    * @param {UsersServiceProps} props - user provided properties for the construct.
    */
-  constructor(scope: Construct, id: string, props: UsersServiceProps = {}) {
+  constructor(scope: Construct, id: string, props: UsersServiceProps) {
     super(scope, id);
 
     // This function tracks the custom authentication flow, determines which challenges
@@ -55,6 +60,7 @@ export class UsersService extends Construct {
     const createChallengeFunction = new Function(this, "createChallengeFunction", {
       entry: path.join(__dirname, `/functions/create-challenge.ts`),
       environment: {
+        emailSource: props.emailSource,
         messageSubject: props.messageSubject ?? `Your secret login code`,
         messageText: props.messageText ?? `Your secret login code: $secretCode`,
         messageHtml:

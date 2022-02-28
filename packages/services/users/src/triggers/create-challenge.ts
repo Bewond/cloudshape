@@ -36,7 +36,7 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
 async function sendEmail(emailAddress: string, secretLoginCode: string) {
   await new SES()
     .sendEmail({
-      Source: "info@bewond.com",
+      Source: env["emailSource"]!,
       Destination: { ToAddresses: [emailAddress] },
       Message: {
         Subject: {
