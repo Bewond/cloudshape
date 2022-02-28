@@ -1,5 +1,5 @@
-import * as cdk from "aws-cdk-lib";
-import { Construct } from "constructs";
+import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
+import type { Construct } from "constructs";
 
 /**
  * The properties for the Function construct.
@@ -21,17 +21,9 @@ export interface FunctionProps {
 /**
  * @summary Nodejs AWS Lambda function construct.
  */
-export class Function extends Construct {
-  /**
-   * @summary Constructs a new instance of the Function class.
-   * @param {Construct} scope - represents the scope for all the resources.
-   * @param {string} id - this is a scope-unique id.
-   * @param {FunctionProps} props - user provided properties for the construct.
-   */
+export class Function extends lambda.NodejsFunction {
   constructor(scope: Construct, id: string, props: FunctionProps) {
-    super(scope, id);
-
-    new cdk.aws_lambda_nodejs.NodejsFunction(this, "nodejsFunction", {
+    super(scope, id, {
       entry: props.entry,
       handler: props.handler ?? "handler",
     });

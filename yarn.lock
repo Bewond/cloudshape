@@ -419,6 +419,8 @@ __metadata:
   dependencies:
     "@cloudshape/constructs": "workspace:^"
     "@cloudshape/core": "workspace:^"
+    aws-cdk-lib: ^2.14.0
+    constructs: ^10.0.74
   peerDependencies:
     aws-cdk-lib: "*"
     constructs: "*"
@@ -428,6 +430,9 @@ __metadata:
 "@cloudshape/constructs@workspace:^, @cloudshape/constructs@workspace:packages/constructs":
   version: 0.0.0-use.local
   resolution: "@cloudshape/constructs@workspace:packages/constructs"
+  dependencies:
+    aws-cdk-lib: ^2.14.0
+    constructs: ^10.0.74
   peerDependencies:
     aws-cdk-lib: "*"
     constructs: "*"
@@ -1274,7 +1279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:^2.13.0":
+"aws-cdk-lib@npm:^2.13.0, aws-cdk-lib@npm:^2.14.0":
   version: 2.14.0
   resolution: "aws-cdk-lib@npm:2.14.0"
   dependencies:
@@ -1665,7 +1670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constructs@npm:^10.0.71":
+"constructs@npm:^10.0.71, constructs@npm:^10.0.74":
   version: 10.0.74
   resolution: "constructs@npm:10.0.74"
   checksum: 70902ecf24121c39f5b62f3614a7e5126b4aa6ed9ec27122dfc35bfaf9f65e5d080cf188766cde3ca0d7ec89fe2176ac38579db33598933c9e3775a3bd0fa217

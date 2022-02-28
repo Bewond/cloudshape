@@ -5,6 +5,10 @@
     "@cloudshape/constructs": "workspace:^",
     "@cloudshape/core": "workspace:^"
   },
+  "devDependencies": {
+    "aws-cdk-lib": "^2.14.0",
+    "constructs": "^10.0.74"
+  },
   "peerDependencies": {
     "aws-cdk-lib": "*",
     "constructs": "*"

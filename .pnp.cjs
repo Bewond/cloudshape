@@ -855,7 +855,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@cloudshape-services/users", "workspace:packages/services/users"],\
             ["@cloudshape/constructs", "virtual:9a3458288b46a14828fdba7b9b38fbde8f29502af28c00af1f4ce9c5ebbb235985fa5e84376fe3b884ba8ac09bc6b9b7af58f5788fa00e1bcf4aa61a22d9bc93#workspace:packages/constructs"],\
-            ["@cloudshape/core", "workspace:packages/core"]\
+            ["@cloudshape/core", "workspace:packages/core"],\
+            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
+            ["constructs", "npm:10.0.74"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -867,8 +869,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cloudshape/constructs", "virtual:9a3458288b46a14828fdba7b9b38fbde8f29502af28c00af1f4ce9c5ebbb235985fa5e84376fe3b884ba8ac09bc6b9b7af58f5788fa00e1bcf4aa61a22d9bc93#workspace:packages/constructs"],\
             ["@types/aws-cdk-lib", null],\
             ["@types/constructs", null],\
-            ["aws-cdk-lib", null],\
-            ["constructs", null]\
+            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
+            ["constructs", "npm:10.0.74"]\
           ],\
           "packagePeers": [\
             "@types/aws-cdk-lib",\
@@ -881,7 +883,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["workspace:packages/constructs", {\
           "packageLocation": "./packages/constructs/",\
           "packageDependencies": [\
-            ["@cloudshape/constructs", "workspace:packages/constructs"]\
+            ["@cloudshape/constructs", "workspace:packages/constructs"],\
+            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
+            ["constructs", "npm:10.0.74"]\
           ],\
           "linkType": "SOFT"\
         }]\
