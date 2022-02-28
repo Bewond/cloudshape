@@ -43,14 +43,14 @@ export class UsersService extends Construct {
   constructor(scope: Construct, id: string, props: UsersServiceProps = {}) {
     super(scope, id);
 
-    // This Lambda function tracks the custom authentication flow, determines which challenges
+    // This function tracks the custom authentication flow, determines which challenges
     // should be presented to the user in which order. At the end, it reports back to the user pool
     // if the user succeeded or failed authentication.
     const defineChallengeFunction = new Function(this, "defineChallengeFunction", {
       entry: path.join(__dirname, `/functions/define-challenge.ts`),
     });
 
-    // This Lambda function is invoked to create a unique challenge for the user.
+    // This function is invoked to create a unique challenge for the user.
     // Generate a one-time login code and mail it to the user.
     const createChallengeFunction = new Function(this, "createChallengeFunction", {
       entry: path.join(__dirname, `/functions/create-challenge.ts`),
@@ -66,17 +66,15 @@ export class UsersService extends Construct {
       },
     });
 
-    // This Lambda function is invoked by the user pool when the user
+    // This function is invoked by the user pool when the user
     // provides the answer to the challenge to determine if that answer is correct.
     const verifyChallengeFunction = new Function(this, "verifyChallengeFunction", {
       entry: path.join(__dirname, `/functions/verify-challenge.ts`),
     });
 
+    // This function auto-confirms users and their email addresses during signup.
     const preAuthFunction = new Function(this, "preAuthFunction", {
       entry: path.join(__dirname, `/functions/pre-auth.ts`),
-    });
-    const postAuthFunction = new Function(this, "postAuthFunction", {
-      entry: path.join(__dirname, `/functions/post-auth.ts`),
     });
   }
 }
