@@ -1,7 +1,8 @@
 import * as iam from "aws-cdk-lib/aws-iam";
 import type { Construct } from "constructs";
 
-type Constructor<T = {}> = new (...args: any[]) => T;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Constructor<T = any> = new (...args: any[]) => T;
 
 /**
  * Represents a permission statement.
@@ -48,7 +49,7 @@ export function PermissionsMixin<T extends Constructor>(Base: T) {
       const statements: iam.PolicyStatement[] = [];
 
       // Add Policy statements.
-      for (let permission of permissions) {
+      for (const permission of permissions) {
         statements.push(
           new iam.PolicyStatement({
             actions: permission.actions,
@@ -58,9 +59,9 @@ export function PermissionsMixin<T extends Constructor>(Base: T) {
       }
 
       // Attach Policy.
-      if (this.constructRole) {
+      if (this.constructRole && this.policyScope && this.policyId) {
         this.constructRole.attachInlinePolicy(
-          new iam.Policy(this.policyScope!, this.policyId!, {
+          new iam.Policy(this.policyScope, this.policyId, {
             statements: statements,
           })
         );

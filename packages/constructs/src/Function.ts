@@ -49,7 +49,7 @@ export class Function extends PermissionsMixin(lambda.NodejsFunction) {
       environment: props.environment ?? {},
     });
 
-    this.initializeMixin(this.role!, this, `${id}PermissionsPolicy`);
+    if (this.role) this.initializeMixin(this.role, this, `${id}PermissionsPolicy`);
 
     // Attach permissions after initialization.
     if (Array.isArray(props.permissions)) {

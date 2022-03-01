@@ -3,6 +3,9 @@ import { SES } from "aws-sdk";
 import { randomDigits } from "crypto-secure-random-digit";
 import { env } from "process";
 
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
 export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
   let secretLoginCode: string;
 
@@ -13,8 +16,8 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
   } else {
     // Existing session: reuse the code from the current session.
     // This allows the user to make a mistake when keying in the code and to then retry.
-    const previousChallenge = event.request.session.slice(-1)[0];
-    secretLoginCode = previousChallenge?.challengeMetadata?.match(/CODE-(\d*)/)![1]!;
+    const previousChallenge = event.request.session.slice(-1)[0]!;
+    secretLoginCode = previousChallenge.challengeMetadata?.match(/CODE-(\d*)/)?.[1]!;
   }
 
   // This is sent back to the client app.

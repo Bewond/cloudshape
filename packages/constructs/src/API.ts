@@ -6,6 +6,7 @@ import type { Construct } from "constructs";
 /**
  * Supported HTTP methods.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export import HttpMethod = gateway.HttpMethod;
 
 /**

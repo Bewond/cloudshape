@@ -4,6 +4,7 @@ import type { Construct } from "constructs";
 /**
  * UserPool App Client.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export import UserPoolClient = cognito.UserPoolClient;
 
 /**
