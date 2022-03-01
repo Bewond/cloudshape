@@ -1,4 +1,4 @@
-import { Auth, Function, Output } from "@cloudshape/constructs";
+import { API, Auth, Function, HttpMethod, Output } from "@cloudshape/constructs";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -62,6 +62,21 @@ export class UsersService extends Construct {
       value: authUserPoolClient.userPoolClientId,
       description: "Auth Service userPoolClientId",
     });
+
+    const authAPI = this.setupAPI(props);
+
+    new Output(this, "userPoolClientId", {
+      value: authAPI.apiEndpoint,
+      description: "Auth Service apiEndpoint",
+    });
+  }
+
+  private setupAPI(props: UsersServiceProps): API {
+    const authAPI = new API(this, "authAPI");
+
+    authAPI.addRoute("/auth/email", HttpMethod.GET, null);
+
+    return authAPI;
   }
 
   private setupUserPool(props: UsersServiceProps): Auth {
