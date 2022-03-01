@@ -27,6 +27,13 @@ export interface APIRoute {
    * Handler Lambda function.
    */
   readonly handler: lambda.IFunction;
+
+  /**
+   * Authorizer.
+   *
+   * @default - uses the default authorizer if one is specified.
+   */
+  readonly authorizer?: gateway.IHttpRouteAuthorizer;
 }
 
 /**
@@ -53,6 +60,13 @@ export interface APIProps {
    * @default { allowOrigins: ["*"] }
    */
   readonly cors?: gateway.CorsPreflightOptions;
+
+  /**
+   * Default Authorizer to applied to all routes.
+   *
+   * @default - No authorizer
+   */
+  readonly defaultAuthorizer?: gateway.IHttpRouteAuthorizer;
 }
 
 /**
@@ -78,6 +92,7 @@ export class API extends gateway.HttpApi {
     );
 
     this.addRoutes({
+      ...route,
       path: route.path,
       methods: [route.method],
       integration: integration,

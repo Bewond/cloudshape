@@ -108,6 +108,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", [\
+        ["npm:2.15.0-alpha.0", {\
+          "packageLocation": "./.yarn/cache/@aws-cdk-aws-apigatewayv2-authorizers-alpha-npm-2.15.0-alpha.0-f2072a30d5-235ee84fc3.zip/node_modules/@aws-cdk/aws-apigatewayv2-authorizers-alpha/",\
+          "packageDependencies": [\
+            ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "npm:2.15.0-alpha.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0", {\
+          "packageLocation": "./.yarn/__virtual__/@aws-cdk-aws-apigatewayv2-authorizers-alpha-virtual-748773f460/0/cache/@aws-cdk-aws-apigatewayv2-authorizers-alpha-npm-2.15.0-alpha.0-f2072a30d5-235ee84fc3.zip/node_modules/@aws-cdk/aws-apigatewayv2-authorizers-alpha/",\
+          "packageDependencies": [\
+            ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
+            ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
+            ["@types/aws-cdk-lib", null],\
+            ["@types/aws-cdk__aws-apigatewayv2-alpha", null],\
+            ["@types/constructs", null],\
+            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
+            ["constructs", "npm:10.0.74"]\
+          ],\
+          "packagePeers": [\
+            "@aws-cdk/aws-apigatewayv2-alpha",\
+            "@types/aws-cdk-lib",\
+            "@types/aws-cdk__aws-apigatewayv2-alpha",\
+            "@types/constructs",\
+            "aws-cdk-lib",\
+            "constructs"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@aws-cdk/aws-apigatewayv2-integrations-alpha", [\
         ["npm:2.15.0-alpha.0", {\
           "packageLocation": "./.yarn/cache/@aws-cdk-aws-apigatewayv2-integrations-alpha-npm-2.15.0-alpha.0-b1e0b5e97c-22ac9cecd6.zip/node_modules/@aws-cdk/aws-apigatewayv2-integrations-alpha/",\
@@ -927,9 +957,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@cloudshape/constructs", "virtual:9a3458288b46a14828fdba7b9b38fbde8f29502af28c00af1f4ce9c5ebbb235985fa5e84376fe3b884ba8ac09bc6b9b7af58f5788fa00e1bcf4aa61a22d9bc93#workspace:packages/constructs"],\
             ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
+            ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-integrations-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@types/aws-cdk-lib", null],\
             ["@types/aws-cdk__aws-apigatewayv2-alpha", null],\
+            ["@types/aws-cdk__aws-apigatewayv2-authorizers-alpha", null],\
             ["@types/aws-cdk__aws-apigatewayv2-integrations-alpha", null],\
             ["@types/constructs", null],\
             ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
@@ -938,6 +970,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/aws-cdk-lib",\
             "@types/aws-cdk__aws-apigatewayv2-alpha",\
+            "@types/aws-cdk__aws-apigatewayv2-authorizers-alpha",\
             "@types/aws-cdk__aws-apigatewayv2-integrations-alpha",\
             "@types/constructs",\
             "aws-cdk-lib",\
@@ -950,6 +983,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@cloudshape/constructs", "workspace:packages/constructs"],\
             ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
+            ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-integrations-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.14.0"],\
             ["constructs", "npm:10.0.74"]\

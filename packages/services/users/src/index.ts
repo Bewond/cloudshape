@@ -65,6 +65,10 @@ export class UsersService extends Construct {
   private setupAPI(authPool: Auth, authClient: UserPoolClient): API {
     const authAPI = new API(this, "authAPI");
 
+    const authorizer = authPool.createAuthorizer({
+      userPoolClients: [authClient],
+    });
+
     // User authentication based on email address.
     authAPI.addRoute({
       path: "/users/auth/email",
@@ -96,6 +100,16 @@ export class UsersService extends Construct {
           actions: ["cognito-idp:AdminRespondToAuthChallenge"],
           resources: [authPool.userPoolArn],
         },
+      }),
+    });
+
+    // Get authenticated user.
+    authAPI.addRoute({
+      path: "/users",
+      method: HttpMethod.GET,
+      authorizer: authorizer,
+      handler: new Function(this, "getUsers", {
+        entry: path.join(__dirname, `/functions/get-users.ts`),
       }),
     });
 

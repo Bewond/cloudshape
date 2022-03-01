@@ -24,6 +24,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-cdk/aws-apigatewayv2-authorizers-alpha@npm:^2.15.0-alpha.0":
+  version: 2.15.0-alpha.0
+  resolution: "@aws-cdk/aws-apigatewayv2-authorizers-alpha@npm:2.15.0-alpha.0"
+  peerDependencies:
+    "@aws-cdk/aws-apigatewayv2-alpha": 2.15.0-alpha.0
+    aws-cdk-lib: ^2.15.0
+    constructs: ^10.0.0
+  checksum: 235ee84fc3c642144a08a622d4af6752e88a410f5ad075ac95f44771bbaf8ee33b2005c3b71295cb8fec2fce5f92a045054257ea22757c26bf28a2798debfe79
+  languageName: node
+  linkType: hard
+
 "@aws-cdk/aws-apigatewayv2-integrations-alpha@npm:^2.15.0-alpha.0":
   version: 2.15.0-alpha.0
   resolution: "@aws-cdk/aws-apigatewayv2-integrations-alpha@npm:2.15.0-alpha.0"
@@ -456,11 +467,13 @@ __metadata:
   resolution: "@cloudshape/constructs@workspace:packages/constructs"
   dependencies:
     "@aws-cdk/aws-apigatewayv2-alpha": ^2.15.0-alpha.0
+    "@aws-cdk/aws-apigatewayv2-authorizers-alpha": ^2.15.0-alpha.0
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": ^2.15.0-alpha.0
     aws-cdk-lib: ^2.14.0
     constructs: ^10.0.74
   peerDependencies:
     "@aws-cdk/aws-apigatewayv2-alpha": "*"
+    "@aws-cdk/aws-apigatewayv2-authorizers-alpha": "*"
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "*"
     aws-cdk-lib: "*"
     constructs: "*"

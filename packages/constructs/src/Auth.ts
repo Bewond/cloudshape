@@ -1,3 +1,4 @@
+import * as authorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import type { Construct } from "constructs";
 
@@ -60,5 +61,18 @@ export class Auth extends cognito.UserPool {
       lambdaTriggers: props.lambdaTriggers ?? {},
       signInCaseSensitive: props.signInCaseSensitive ?? false,
     });
+  }
+
+  /**
+   * Create a user pool authorizer to be bound with HTTP route.
+   */
+  public createAuthorizer(
+    props?: authorizers.HttpUserPoolAuthorizerProps
+  ): authorizers.HttpUserPoolAuthorizer {
+    return new authorizers.HttpUserPoolAuthorizer(
+      `${this.userPoolId}UserPoolAuthorizer`,
+      this,
+      props
+    );
   }
 }

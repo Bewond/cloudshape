@@ -1,4 +1,7 @@
-import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
+import * as authorizers from "@aws-cdk/aws-apigatewayv2-authorizers-alpha";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as lambdaNode from "aws-cdk-lib/aws-lambda-nodejs";
+import * as logs from "aws-cdk-lib/aws-logs";
 import type { Construct } from "constructs";
 import { Permission, PermissionsMixin } from "./Permissions";
 
@@ -40,13 +43,15 @@ export interface FunctionProps {
 /**
  * @summary Nodejs AWS Lambda function construct.
  */
-export class Function extends PermissionsMixin(lambda.NodejsFunction) {
+export class Function extends PermissionsMixin(lambdaNode.NodejsFunction) {
   constructor(scope: Construct, id: string, props: FunctionProps) {
     super(scope, id, {
       ...props,
       entry: props.entry,
       handler: props.handler ?? "handler",
       environment: props.environment ?? {},
+      tracing: lambda.Tracing.ACTIVE,
+      logRetention: logs.RetentionDays.SIX_MONTHS,
     });
 
     if (this.role) this.initializeMixin(this.role, this, `${id}PermissionsPolicy`);
@@ -57,5 +62,17 @@ export class Function extends PermissionsMixin(lambda.NodejsFunction) {
     } else if (props.permissions) {
       this.attachPermissions([props.permissions]);
     }
+  }
+
+  /**
+   * Create a lambda authorizer to be bound with HTTP route.
+   */
+  public createAuthorizer(
+    props?: authorizers.HttpLambdaAuthorizerProps
+  ): authorizers.HttpLambdaAuthorizer {
+    return new authorizers.HttpLambdaAuthorizer(`${this.functionName}LambdaAuthorizer`, this, {
+      ...props,
+      responseTypes: props?.responseTypes ?? [authorizers.HttpLambdaResponseType.SIMPLE],
+    });
   }
 }
