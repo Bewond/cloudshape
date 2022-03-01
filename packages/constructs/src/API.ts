@@ -9,6 +9,26 @@ import type { Construct } from "constructs";
 export import HttpMethod = gateway.HttpMethod;
 
 /**
+ * Route properties for API Gateway.
+ */
+export interface APIRoute {
+  /**
+   * Route path.
+   */
+  readonly path: string;
+
+  /**
+   * HTTP method to configure.
+   */
+  readonly method: gateway.HttpMethod;
+
+  /**
+   * Handler Lambda function.
+   */
+  readonly handler: lambda.IFunction;
+}
+
+/**
  * The properties for the API construct.
  */
 export interface APIProps {
@@ -20,7 +40,7 @@ export interface APIProps {
   readonly name?: string;
 
   /**
-   * The description of the API.
+   * Description of the API.
    *
    * @default - none
    */
@@ -50,11 +70,16 @@ export class API extends gateway.HttpApi {
   /**
    * Add API route.
    */
-  addRoute(path: string, method: HttpMethod, handler: lambda.IFunction): void {
+  addRoute(route: APIRoute): void {
+    const integration = new integrations.HttpLambdaIntegration(
+      `${this.apiId}RouteIntegration`,
+      route.handler
+    );
+
     this.addRoutes({
-      path: path,
-      methods: [method],
-      integration: new integrations.HttpLambdaIntegration(`${this.apiId}RouteIntegration`, handler),
+      path: route.path,
+      methods: [route.method],
+      integration: integration,
     });
   }
 }

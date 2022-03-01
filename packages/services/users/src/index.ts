@@ -1,5 +1,4 @@
-import { API, Auth, Function, HttpMethod, Output } from "@cloudshape/constructs";
-import type * as cognito from "aws-cdk-lib/aws-cognito";
+import { API, Auth, Function, HttpMethod, Output, UserPoolClient } from "@cloudshape/constructs";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -72,26 +71,30 @@ export class UsersService extends Construct {
     });
   }
 
-  private setupAPI(authPool: Auth, authClient: cognito.UserPoolClient): API {
+  private setupAPI(authPool: Auth, authClient: UserPoolClient): API {
     const authAPI = new API(this, "authAPI");
 
-    authAPI.addRoute("/users/auth/email", HttpMethod.POST, new Function(this, "postUsersAuthEmail", {
-      entry: path.join(__dirname, `/functions/post-users-auth-email.ts`),
-      environment: {
-        userPoolId: authPool.userPoolId,
-        userPoolClientId: authClient.userPoolClientId,
-      },
-      permissions: [
-        {
-          actions: [
-            "cognito-idp:ListUsers",
-            "cognito-idp:SignUp",
-            "cognito-idp:AdminInitiateAuth",
-          ],
-          resources: [authPool.userPoolArn],
-        }
-      ]
-    }));
+    authAPI.addRoute({
+      path: "/users/auth/email",
+      method: HttpMethod.POST,
+      handler: new Function(this, "postUsersAuthEmail", {
+        entry: path.join(__dirname, `/functions/post-users-auth-email.ts`),
+        environment: {
+          userPoolId: authPool.userPoolId,
+          userPoolClientId: authClient.userPoolClientId,
+        },
+        permissions: [
+          {
+            actions: [
+              "cognito-idp:ListUsers",
+              "cognito-idp:SignUp",
+              "cognito-idp:AdminInitiateAuth",
+            ],
+            resources: [authPool.userPoolArn],
+          },
+        ],
+      }),
+    });
 
     return authAPI;
   }

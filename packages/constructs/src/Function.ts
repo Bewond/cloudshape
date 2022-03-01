@@ -31,7 +31,7 @@ export interface FunctionProps {
 
   /**
    * Permissions for actions on resources.
-   * 
+   *
    * @default - none
    */
   readonly permissions?: Permission[];

@@ -2,6 +2,11 @@ import * as cognito from "aws-cdk-lib/aws-cognito";
 import type { Construct } from "constructs";
 
 /**
+ * UserPool App Client.
+ */
+export import UserPoolClient = cognito.UserPoolClient;
+
+/**
  * The properties for the Auth construct.
  */
 export interface AuthProps {
