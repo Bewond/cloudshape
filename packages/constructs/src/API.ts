@@ -4,7 +4,7 @@ import type * as lambda from "aws-cdk-lib/aws-lambda";
 import type { Construct } from "constructs";
 
 /**
- * Supported HTTP methods
+ * Supported HTTP methods.
  */
 export import HttpMethod = gateway.HttpMethod;
 

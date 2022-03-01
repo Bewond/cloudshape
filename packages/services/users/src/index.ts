@@ -1,4 +1,5 @@
 import { API, Auth, Function, HttpMethod, Output } from "@cloudshape/constructs";
+import type * as cognito from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -63,18 +64,34 @@ export class UsersService extends Construct {
       description: "Auth Service userPoolClientId",
     });
 
-    const authAPI = this.setupAPI(props);
+    const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
 
-    new Output(this, "userPoolClientId", {
+    new Output(this, "apiEndpoint", {
       value: authAPI.apiEndpoint,
       description: "Auth Service apiEndpoint",
     });
   }
 
-  private setupAPI(props: UsersServiceProps): API {
+  private setupAPI(authPool: Auth, authClient: cognito.UserPoolClient): API {
     const authAPI = new API(this, "authAPI");
 
-    authAPI.addRoute("/auth/email", HttpMethod.GET, null);
+    authAPI.addRoute("/users/auth/email", HttpMethod.POST, new Function(this, "postUsersAuthEmail", {
+      entry: path.join(__dirname, `/functions/post-users-auth-email.ts`),
+      environment: {
+        userPoolId: authPool.userPoolId,
+        userPoolClientId: authClient.userPoolClientId,
+      },
+      permissions: [
+        {
+          actions: [
+            "cognito-idp:ListUsers",
+            "cognito-idp:SignUp",
+            "cognito-idp:AdminInitiateAuth",
+          ],
+          resources: [authPool.userPoolArn],
+        }
+      ]
+    }));
 
     return authAPI;
   }

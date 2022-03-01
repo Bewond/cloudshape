@@ -1,6 +1,6 @@
 import * as lambda from "aws-cdk-lib/aws-lambda-nodejs";
 import type { Construct } from "constructs";
-import { PermissionsMixin } from "./Permissions";
+import { Permission, PermissionsMixin } from "./Permissions";
 
 /**
  * The properties for the Function construct.
@@ -28,6 +28,13 @@ export interface FunctionProps {
   readonly environment?: {
     [key: string]: string;
   };
+
+  /**
+   * Permissions for actions on resources.
+   * 
+   * @default - none
+   */
+  readonly permissions?: Permission[];
 }
 
 /**
@@ -43,5 +50,10 @@ export class Function extends PermissionsMixin(lambda.NodejsFunction) {
     });
 
     this.initializeMixin(this.role!, this, `${id}PermissionsPolicy`);
+
+    // Attach permissions after initialization.
+    if (props.permissions) {
+      this.attachPermissions(props.permissions);
+    }
   }
 }
