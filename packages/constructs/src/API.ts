@@ -70,6 +70,11 @@ export interface APIProps {
 }
 
 /**
+ * Explicitly configure no authorizers on specific API routes.
+ */
+export const noneAuthorizer = new gateway.HttpNoneAuthorizer();
+
+/**
  * @summary API gateway construct.
  */
 export class API extends gateway.HttpApi {
