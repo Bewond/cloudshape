@@ -34,7 +34,7 @@ export interface FunctionProps {
    *
    * @default - none
    */
-  readonly permissions?: Permission[];
+  readonly permissions?: Permission[] | Permission;
 }
 
 /**
@@ -52,8 +52,10 @@ export class Function extends PermissionsMixin(lambda.NodejsFunction) {
     this.initializeMixin(this.role!, this, `${id}PermissionsPolicy`);
 
     // Attach permissions after initialization.
-    if (props.permissions) {
+    if (Array.isArray(props.permissions)) {
       this.attachPermissions(props.permissions);
+    } else if (props.permissions) {
+      this.attachPermissions([props.permissions]);
     }
   }
 }

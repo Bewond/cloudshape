@@ -54,15 +54,6 @@ export class UsersService extends Construct {
       authFlows: { custom: true },
     });
 
-    new Output(this, "userPoolId", {
-      value: authUserPool.userPoolId,
-      description: "Auth Service userPoolId",
-    });
-    new Output(this, "userPoolClientId", {
-      value: authUserPoolClient.userPoolClientId,
-      description: "Auth Service userPoolClientId",
-    });
-
     const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
 
     new Output(this, "apiEndpoint", {
@@ -74,6 +65,7 @@ export class UsersService extends Construct {
   private setupAPI(authPool: Auth, authClient: UserPoolClient): API {
     const authAPI = new API(this, "authAPI");
 
+    // User authentication based on email address.
     authAPI.addRoute({
       path: "/users/auth/email",
       method: HttpMethod.POST,
@@ -83,16 +75,27 @@ export class UsersService extends Construct {
           userPoolId: authPool.userPoolId,
           userPoolClientId: authClient.userPoolClientId,
         },
-        permissions: [
-          {
-            actions: [
-              "cognito-idp:ListUsers",
-              "cognito-idp:SignUp",
-              "cognito-idp:AdminInitiateAuth",
-            ],
-            resources: [authPool.userPoolArn],
-          },
-        ],
+        permissions: {
+          actions: ["cognito-idp:ListUsers", "cognito-idp:SignUp", "cognito-idp:AdminInitiateAuth"],
+          resources: [authPool.userPoolArn],
+        },
+      }),
+    });
+
+    // Complete user authentication via secret code.
+    authAPI.addRoute({
+      path: "/users/auth/email",
+      method: HttpMethod.PUT,
+      handler: new Function(this, "putUsersAuthEmail", {
+        entry: path.join(__dirname, `/functions/put-users-auth-email.ts`),
+        environment: {
+          userPoolId: authPool.userPoolId,
+          userPoolClientId: authClient.userPoolClientId,
+        },
+        permissions: {
+          actions: ["cognito-idp:AdminRespondToAuthChallenge"],
+          resources: [authPool.userPoolArn],
+        },
       }),
     });
 
