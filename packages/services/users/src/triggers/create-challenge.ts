@@ -6,18 +6,18 @@ import { env } from "process";
 export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
   let secretLoginCode: string | undefined;
 
+  // Existing session:
   if (event.request.session && event.request.session.length) {
-    // Existing session:
     // Reuse the code from the current session. This allows the user
     // to make a mistake when keying in the code and to then retry.
     const previousChallenge = event.request.session.slice(-1)[0];
     secretLoginCode = previousChallenge?.challengeMetadata?.match(/CODE-(\d*)/)?.[1];
-  } else {
-    // New authentication session:
+  }
+  // New session:
+  else if (event.request.userAttributes["email"]) {
     // Generate a new secret login code and send it to the user.
     secretLoginCode = randomDigits(6).join("");
-    if (event.request.userAttributes["email"])
-      await sendEmail(event.request.userAttributes["email"], secretLoginCode);
+    await sendEmail(event.request.userAttributes["email"], secretLoginCode);
   }
 
   if (secretLoginCode) {
@@ -30,7 +30,6 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
     event.response.challengeMetadata = `CODE-${secretLoginCode}`;
   }
 
-  // This is sent back to the client app.
   event.response.publicChallengeParameters = {
     email: event.request.userAttributes["email"] ?? "undefined",
   };
@@ -39,6 +38,8 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
 };
 
 async function sendEmail(emailAddress: string, secretLoginCode: string) {
+  const varname = "$secretCode";
+
   if (env["emailSource"] && env["messageSubject"] && env["messageText"] && env["messageHtml"])
     await new SES()
       .sendEmail({
@@ -46,14 +47,14 @@ async function sendEmail(emailAddress: string, secretLoginCode: string) {
         Destination: { ToAddresses: [emailAddress] },
         Message: {
           Subject: {
-            Data: env["messageSubject"].replaceAll("$secretCode", secretLoginCode),
+            Data: env["messageSubject"].replaceAll(varname, secretLoginCode),
           },
           Body: {
             Text: {
-              Data: env["messageText"].replaceAll("$secretCode", secretLoginCode),
+              Data: env["messageText"].replaceAll(varname, secretLoginCode),
             },
             Html: {
-              Data: env["messageHtml"].replaceAll("$secretCode", secretLoginCode),
+              Data: env["messageHtml"].replaceAll(varname, secretLoginCode),
             },
           },
         },
