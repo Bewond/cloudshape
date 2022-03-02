@@ -45,7 +45,7 @@ export interface APIValidatorData<RequestType, ResponseType, EnvironmentType> {
   responseSchema: JTDSchemaType<ResponseType>;
 
   /**
-   * Schema used to validate the environment variables.
+   * Schema used to validate environment variables.
    */
   environmentSchema?: JTDSchemaType<EnvironmentType>;
 }
