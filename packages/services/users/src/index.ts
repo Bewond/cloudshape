@@ -69,16 +69,18 @@ export class UsersService extends Construct {
       userPoolClients: [authClient],
     });
 
+    const environment = {
+      userPoolId: authPool.userPoolId,
+      userPoolClientId: authClient.userPoolClientId,
+    };
+
     // User authentication based on email address.
     authAPI.addRoute({
       path: "/users/auth/email",
       method: HttpMethod.POST,
       handler: new Function(this, "postUsersAuthEmail", {
         entry: path.join(__dirname, `/functions/post-users-auth-email.ts`),
-        environment: {
-          userPoolId: authPool.userPoolId,
-          userPoolClientId: authClient.userPoolClientId,
-        },
+        environment: environment,
         permissions: {
           actions: ["cognito-idp:ListUsers", "cognito-idp:SignUp", "cognito-idp:AdminInitiateAuth"],
           resources: [authPool.userPoolArn],
@@ -92,10 +94,7 @@ export class UsersService extends Construct {
       method: HttpMethod.PUT,
       handler: new Function(this, "putUsersAuthEmail", {
         entry: path.join(__dirname, `/functions/put-users-auth-email.ts`),
-        environment: {
-          userPoolId: authPool.userPoolId,
-          userPoolClientId: authClient.userPoolClientId,
-        },
+        environment: environment,
         permissions: {
           actions: ["cognito-idp:AdminRespondToAuthChallenge"],
           resources: [authPool.userPoolArn],
