@@ -1,8 +1,7 @@
-import { SchemaType, validateEventResult } from "@cloudshape/core";
+import { APIValidator } from "@cloudshape/core";
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import { CognitoIdentityServiceProvider } from "aws-sdk";
 import { randomBytes } from "crypto";
-import { env } from "process";
 
 interface Request {
   email: string;
@@ -14,33 +13,45 @@ interface Response {
   session: string;
 }
 
-const requestSchema: SchemaType<Request> = {
-  properties: {
-    email: { type: "string" },
-  },
-};
-
-const responseSchema: SchemaType<Response> = {
-  properties: {
-    userId: { type: "string" },
-    email: { type: "string" },
-    session: { type: "string" },
-  },
-};
+interface Environment {
+  userPoolId: string;
+  userPoolClientId: string;
+}
 
 export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
-  console.log("Event:", JSON.stringify(event, null, 2));
+  console.log("event:", JSON.stringify(event, null, 2));
 
-  return validateEventResult(event, requestSchema, responseSchema, main);
+  const validator = new APIValidator<Request, Response, Environment>({
+    requestSchema: {
+      properties: {
+        email: { type: "string" },
+      },
+    },
+    responseSchema: {
+      properties: {
+        userId: { type: "string" },
+        email: { type: "string" },
+        session: { type: "string" },
+      },
+    },
+    environmentSchema: {
+      properties: {
+        userPoolId: { type: "string" },
+        userPoolClientId: { type: "string" },
+      },
+    },
+  });
+
+  return validator.validate(event, main, process.env);
 };
 
-async function main(request: Request): Promise<any> {
+async function main(request: Request, env: Environment): Promise<unknown> {
   const identityService = new CognitoIdentityServiceProvider();
 
   // Check if the user exists.
   const listUsers = await identityService
     .listUsers({
-      UserPoolId: env["userPoolId"]!,
+      UserPoolId: env.userPoolId,
       Filter: `email="${request.email}"`,
       Limit: 1,
     })
@@ -50,7 +61,7 @@ async function main(request: Request): Promise<any> {
   if (listUsers.Users && listUsers.Users.length == 0) {
     await identityService
       .signUp({
-        ClientId: env["userPoolClientId"]!,
+        ClientId: env.userPoolClientId,
         Username: request.email,
         Password: randomBytes(64).toString("base64"),
         UserAttributes: [
@@ -66,8 +77,8 @@ async function main(request: Request): Promise<any> {
   // User already exists: initiate auth.
   const authResponse = await identityService
     .adminInitiateAuth({
-      UserPoolId: env["userPoolId"]!,
-      ClientId: env["userPoolClientId"]!,
+      UserPoolId: env.userPoolId,
+      ClientId: env.userPoolClientId,
       AuthFlow: "CUSTOM_AUTH",
       AuthParameters: {
         USERNAME: request.email,
