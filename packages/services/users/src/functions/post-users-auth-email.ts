@@ -42,7 +42,7 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  return validator.validate(event, main, process.env);
+  return await validator.validate(event, main, process.env);
 };
 
 async function main(request: Request, env: Environment): Promise<unknown> {
