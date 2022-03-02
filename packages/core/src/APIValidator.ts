@@ -32,7 +32,7 @@ export interface APIResult {
 
 /**
  * @summary Data to initialize APIValidator.
- * 
+ *
  * @see https://ajv.js.org/json-type-definition.html
  */
 export interface APIValidatorData<RequestType, ResponseType, EnvironmentType> {

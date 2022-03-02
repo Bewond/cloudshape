@@ -102,7 +102,7 @@ export class UsersService extends Construct {
       }),
     });
 
-    // Get authenticated user.
+    /*// Get authenticated user.
     authAPI.addRoute({
       path: "/users",
       method: HttpMethod.GET,
@@ -110,7 +110,7 @@ export class UsersService extends Construct {
       handler: new Function(this, "getUsers", {
         entry: path.join(__dirname, `/functions/get-users.ts`),
       }),
-    });
+    });*/
 
     return authAPI;
   }
