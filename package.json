@@ -6,6 +6,7 @@
     "build": "tsc -b",
     "watch": "tsc -b -w",
     "clean": "tsc -b --clean",
+    "emit": "tsc --declaration --emitDeclarationOnly --declarationMap",
     "lint": "eslint . --fix --ext .js,.ts",
     "format": "prettier . --write",
     "test": "jest --coverage --passWithNoTests"

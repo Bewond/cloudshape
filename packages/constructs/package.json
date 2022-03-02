@@ -1,6 +1,7 @@
 {
   "name": "@cloudshape/constructs",
   "main": "src/index.ts",
+  "types": "./dist/constructs/src/index.d.ts",
   "packageManager": "yarn@3.2.0",
   "devDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "^2.15.0-alpha.0",

@@ -65,9 +65,9 @@ export class UsersService extends Construct {
   private setupAPI(authPool: Auth, authClient: UserPoolClient): API {
     const authAPI = new API(this, "authAPI");
 
-    const authorizer = authPool.createAuthorizer({
+    /*const authorizer = authPool.createAuthorizer({
       userPoolClients: [authClient],
-    });
+    });*/
 
     const environment = {
       userPoolId: authPool.userPoolId,
