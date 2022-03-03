@@ -15,3 +15,4 @@ class Output extends aws_cdk_lib_1.CfnOutput {
     }
 }
 exports.Output = Output;
+//# sourceMappingURL=Output.js.map

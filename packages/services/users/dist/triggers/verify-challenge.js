@@ -12,3 +12,4 @@ const handler = async (event) => {
     return event;
 };
 exports.handler = handler;
+//# sourceMappingURL=verify-challenge.js.map

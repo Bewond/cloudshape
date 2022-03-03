@@ -61,3 +61,4 @@ function PermissionsMixin(Base) {
     };
 }
 exports.PermissionsMixin = PermissionsMixin;
+//# sourceMappingURL=Permissions.js.map

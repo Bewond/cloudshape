@@ -72,3 +72,4 @@ async function main(request, env) {
         session: authResponse.Session,
     };
 }
+//# sourceMappingURL=post-users-auth-email.js.map

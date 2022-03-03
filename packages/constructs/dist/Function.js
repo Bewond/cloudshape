@@ -63,3 +63,4 @@ class Function extends (0, Permissions_1.PermissionsMixin)(lambdaNode.NodejsFunc
     }
 }
 exports.Function = Function;
+//# sourceMappingURL=Function.js.map

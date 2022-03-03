@@ -61,3 +61,4 @@ class API extends gateway.HttpApi {
     }
 }
 exports.API = API;
+//# sourceMappingURL=API.js.map

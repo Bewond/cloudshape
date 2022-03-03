@@ -56,3 +56,4 @@ async function sendEmail(emailAddress, secretLoginCode) {
         })
             .promise();
 }
+//# sourceMappingURL=create-challenge.js.map

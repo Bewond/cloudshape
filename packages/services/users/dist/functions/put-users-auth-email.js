@@ -54,3 +54,4 @@ async function main(request, env) {
         refreshToken: challengeResponse.AuthenticationResult?.RefreshToken,
     };
 }
+//# sourceMappingURL=put-users-auth-email.js.map

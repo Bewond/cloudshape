@@ -144,3 +144,4 @@ class UsersService extends constructs_2.Construct {
     }
 }
 exports.UsersService = UsersService;
+//# sourceMappingURL=index.js.map

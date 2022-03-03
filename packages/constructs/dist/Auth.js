@@ -53,3 +53,4 @@ class Auth extends cognito.UserPool {
     }
 }
 exports.Auth = Auth;
+//# sourceMappingURL=Auth.js.map
