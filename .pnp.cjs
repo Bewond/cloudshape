@@ -53,17 +53,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.1"],\
-            ["@types/node", "npm:17.0.21"],\
             ["@types/prettier", "npm:2.4.4"],\
             ["@typescript-eslint/eslint-plugin", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:5.13.0"],\
             ["@typescript-eslint/parser", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:5.13.0"],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"],\
             ["eslint", "npm:8.10.0"],\
-            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.4.0"],\
+            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.5.0"],\
             ["eslint-plugin-jest", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:26.1.1"],\
             ["jest", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:27.5.1"],\
             ["prettier", "npm:2.5.1"],\
@@ -96,8 +92,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@types/aws-cdk-lib", null],\
             ["@types/constructs", null],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"]\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["constructs", "npm:10.0.77"]\
           ],\
           "packagePeers": [\
             "@types/aws-cdk-lib",\
@@ -124,8 +120,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/aws-cdk-lib", null],\
             ["@types/aws-cdk__aws-apigatewayv2-alpha", null],\
             ["@types/constructs", null],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"]\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["constructs", "npm:10.0.77"]\
           ],\
           "packagePeers": [\
             "@aws-cdk/aws-apigatewayv2-alpha",\
@@ -154,8 +150,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/aws-cdk-lib", null],\
             ["@types/aws-cdk__aws-apigatewayv2-alpha", null],\
             ["@types/constructs", null],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"]\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["constructs", "npm:10.0.77"]\
           ],\
           "packagePeers": [\
             "@aws-cdk/aws-apigatewayv2-alpha",\
@@ -942,11 +938,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cloudshape-services/users", "workspace:packages/services/users"],\
             ["@cloudshape/constructs", "virtual:9a3458288b46a14828fdba7b9b38fbde8f29502af28c00af1f4ce9c5ebbb235985fa5e84376fe3b884ba8ac09bc6b9b7af58f5788fa00e1bcf4aa61a22d9bc93#workspace:packages/constructs"],\
             ["@cloudshape/core", "workspace:packages/core"],\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/aws-lambda", "npm:8.10.93"],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["aws-sdk", "npm:2.1084.0"],\
-            ["constructs", "npm:10.0.75"],\
-            ["crypto-secure-random-digit", "npm:1.0.10"]\
+            ["@types/node", "npm:17.0.21"],\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["aws-sdk", "npm:2.1085.0"],\
+            ["constructs", "npm:10.0.77"],\
+            ["crypto-secure-random-digit", "npm:1.0.10"],\
+            ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -959,13 +958,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-integrations-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/aws-cdk-lib", null],\
             ["@types/aws-cdk__aws-apigatewayv2-alpha", null],\
             ["@types/aws-cdk__aws-apigatewayv2-authorizers-alpha", null],\
             ["@types/aws-cdk__aws-apigatewayv2-integrations-alpha", null],\
             ["@types/constructs", null],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"]\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["constructs", "npm:10.0.77"],\
+            ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\
           "packagePeers": [\
             "@types/aws-cdk-lib",\
@@ -985,8 +986,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-cdk/aws-apigatewayv2-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-authorizers-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
             ["@aws-cdk/aws-apigatewayv2-integrations-alpha", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0-alpha.0"],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"]\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
+            ["constructs", "npm:10.0.77"],\
+            ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -996,7 +999,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/core/",\
           "packageDependencies": [\
             ["@cloudshape/core", "workspace:packages/core"],\
-            ["ajv", "npm:8.10.0"]\
+            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
+            ["ajv", "npm:8.10.0"],\
+            ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -1592,16 +1597,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-yargs-npm-16.0.4-7aaef7d6c8-caa21d2c95.zip/node_modules/@types/yargs/",\
           "packageDependencies": [\
             ["@types/yargs", "npm:16.0.4"],\
-            ["@types/yargs-parser", "npm:20.2.1"]\
+            ["@types/yargs-parser", "npm:21.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@types/yargs-parser", [\
-        ["npm:20.2.1", {\
-          "packageLocation": "./.yarn/cache/@types-yargs-parser-npm-20.2.1-2eed5b5c1c-1d039e6449.zip/node_modules/@types/yargs-parser/",\
+        ["npm:21.0.0", {\
+          "packageLocation": "./.yarn/cache/@types-yargs-parser-npm-21.0.0-c8a3b32c52-b2f4c8d12a.zip/node_modules/@types/yargs-parser/",\
           "packageDependencies": [\
-            ["@types/yargs-parser", "npm:20.2.1"]\
+            ["@types/yargs-parser", "npm:21.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2072,14 +2077,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0", {\
-          "packageLocation": "./.yarn/__virtual__/aws-cdk-lib-virtual-89812f8981/0/cache/aws-cdk-lib-npm-2.15.0-a8bfda3064-b7682979a2.zip/node_modules/aws-cdk-lib/",\
+        ["virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0", {\
+          "packageLocation": "./.yarn/__virtual__/aws-cdk-lib-virtual-cf06510efa/0/cache/aws-cdk-lib-npm-2.15.0-a8bfda3064-b7682979a2.zip/node_modules/aws-cdk-lib/",\
           "packageDependencies": [\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
+            ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
             ["@balena/dockerignore", "npm:1.0.2"],\
             ["@types/constructs", null],\
             ["case", "npm:1.6.3"],\
-            ["constructs", "npm:10.0.75"],\
+            ["constructs", "npm:10.0.77"],\
             ["fs-extra", "npm:9.1.0"],\
             ["ignore", "npm:5.2.0"],\
             ["jsonschema", "npm:1.4.0"],\
@@ -2096,10 +2101,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["aws-sdk", [\
-        ["npm:2.1084.0", {\
-          "packageLocation": "./.yarn/cache/aws-sdk-npm-2.1084.0-7edc161308-1854bd426e.zip/node_modules/aws-sdk/",\
+        ["npm:2.1085.0", {\
+          "packageLocation": "./.yarn/cache/aws-sdk-npm-2.1085.0-c78434bf4e-0545a4a445.zip/node_modules/aws-sdk/",\
           "packageDependencies": [\
-            ["aws-sdk", "npm:2.1084.0"],\
+            ["aws-sdk", "npm:2.1085.0"],\
             ["buffer", "npm:4.9.2"],\
             ["events", "npm:1.1.1"],\
             ["ieee754", "npm:1.1.13"],\
@@ -2497,17 +2502,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["cloudshape", "workspace:."],\
-            ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["@types/jest", "npm:27.4.1"],\
-            ["@types/node", "npm:17.0.21"],\
             ["@types/prettier", "npm:2.4.4"],\
             ["@typescript-eslint/eslint-plugin", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:5.13.0"],\
             ["@typescript-eslint/parser", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:5.13.0"],\
-            ["aws-cdk-lib", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:2.15.0"],\
-            ["constructs", "npm:10.0.75"],\
             ["eslint", "npm:8.10.0"],\
-            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.4.0"],\
+            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.5.0"],\
             ["eslint-plugin-jest", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:26.1.1"],\
             ["jest", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:27.5.1"],\
             ["prettier", "npm:2.5.1"],\
@@ -2606,10 +2607,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["constructs", [\
-        ["npm:10.0.75", {\
-          "packageLocation": "./.yarn/cache/constructs-npm-10.0.75-6b9c58262f-d73d58f3ce.zip/node_modules/constructs/",\
+        ["npm:10.0.77", {\
+          "packageLocation": "./.yarn/cache/constructs-npm-10.0.77-b99e6c1acb-cca9a03e59.zip/node_modules/constructs/",\
           "packageDependencies": [\
-            ["constructs", "npm:10.0.75"]\
+            ["constructs", "npm:10.0.77"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2973,17 +2974,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["eslint-config-prettier", [\
-        ["npm:8.4.0", {\
-          "packageLocation": "./.yarn/cache/eslint-config-prettier-npm-8.4.0-b62c916bcb-ee8dc343f1.zip/node_modules/eslint-config-prettier/",\
+        ["npm:8.5.0", {\
+          "packageLocation": "./.yarn/cache/eslint-config-prettier-npm-8.5.0-a1dd58b6d8-0d0f5c32e7.zip/node_modules/eslint-config-prettier/",\
           "packageDependencies": [\
-            ["eslint-config-prettier", "npm:8.4.0"]\
+            ["eslint-config-prettier", "npm:8.5.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.4.0", {\
-          "packageLocation": "./.yarn/__virtual__/eslint-config-prettier-virtual-6321dd316e/0/cache/eslint-config-prettier-npm-8.4.0-b62c916bcb-ee8dc343f1.zip/node_modules/eslint-config-prettier/",\
+        ["virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.5.0", {\
+          "packageLocation": "./.yarn/__virtual__/eslint-config-prettier-virtual-303a74d697/0/cache/eslint-config-prettier-npm-8.5.0-a1dd58b6d8-0d0f5c32e7.zip/node_modules/eslint-config-prettier/",\
           "packageDependencies": [\
-            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.4.0"],\
+            ["eslint-config-prettier", "virtual:334e4e9b2234be670b959d073296ae2736386eb4fbd218db612f659655b3697798e143d47bce585941f63319034e99002438244ec40e06f767e42eeebc73c613#npm:8.5.0"],\
             ["@types/eslint", "npm:8.4.1"],\
             ["eslint", "npm:8.10.0"]\
           ],\
@@ -4753,10 +4754,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["make-fetch-happen", [\
-        ["npm:10.0.3", {\
-          "packageLocation": "./.yarn/cache/make-fetch-happen-npm-10.0.3-e552879254-edf3ba5119.zip/node_modules/make-fetch-happen/",\
+        ["npm:10.0.4", {\
+          "packageLocation": "./.yarn/cache/make-fetch-happen-npm-10.0.4-f2015f4f1f-036fcfaec1.zip/node_modules/make-fetch-happen/",\
           "packageDependencies": [\
-            ["make-fetch-happen", "npm:10.0.3"],\
+            ["make-fetch-happen", "npm:10.0.4"],\
             ["agentkeepalive", "npm:4.2.1"],\
             ["cacache", "npm:15.3.0"],\
             ["http-cache-semantics", "npm:4.1.0"],\
@@ -4766,7 +4767,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lru-cache", "npm:7.4.0"],\
             ["minipass", "npm:3.1.6"],\
             ["minipass-collect", "npm:1.0.2"],\
-            ["minipass-fetch", "npm:1.4.1"],\
+            ["minipass-fetch", "npm:2.0.2"],\
             ["minipass-flush", "npm:1.0.5"],\
             ["minipass-pipeline", "npm:1.2.4"],\
             ["negotiator", "npm:0.6.3"],\
@@ -4884,10 +4885,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["minipass-fetch", [\
-        ["npm:1.4.1", {\
-          "packageLocation": "./.yarn/cache/minipass-fetch-npm-1.4.1-2d67357feb-ec93697bdb.zip/node_modules/minipass-fetch/",\
+        ["npm:2.0.2", {\
+          "packageLocation": "./.yarn/cache/minipass-fetch-npm-2.0.2-3347554918-0613b0a6ef.zip/node_modules/minipass-fetch/",\
           "packageDependencies": [\
-            ["minipass-fetch", "npm:1.4.1"],\
+            ["minipass-fetch", "npm:2.0.2"],\
             ["encoding", "npm:0.1.13"],\
             ["minipass", "npm:3.1.6"],\
             ["minipass-sized", "npm:1.0.3"],\
@@ -4988,7 +4989,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["env-paths", "npm:2.2.1"],\
             ["glob", "npm:7.2.0"],\
             ["graceful-fs", "npm:4.2.9"],\
-            ["make-fetch-happen", "npm:10.0.3"],\
+            ["make-fetch-happen", "npm:10.0.4"],\
             ["nopt", "npm:5.0.0"],\
             ["npmlog", "npm:6.0.1"],\
             ["rimraf", "npm:3.0.2"],\

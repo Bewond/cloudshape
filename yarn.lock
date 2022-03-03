@@ -451,11 +451,14 @@ __metadata:
   dependencies:
     "@cloudshape/constructs": "workspace:^"
     "@cloudshape/core": "workspace:^"
+    "@tsconfig/node16-strictest": ^1.0.0
     "@types/aws-lambda": ^8.10.92
+    "@types/node": ^17.0.21
     aws-cdk-lib: ^2.14.0
     aws-sdk: ^2.1083.0
     constructs: ^10.0.74
     crypto-secure-random-digit: ^1.0.10
+    typescript: ^4.6.2
   peerDependencies:
     aws-cdk-lib: "*"
     constructs: "*"
@@ -469,8 +472,10 @@ __metadata:
     "@aws-cdk/aws-apigatewayv2-alpha": ^2.15.0-alpha.0
     "@aws-cdk/aws-apigatewayv2-authorizers-alpha": ^2.15.0-alpha.0
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": ^2.15.0-alpha.0
+    "@tsconfig/node16-strictest": ^1.0.0
     aws-cdk-lib: ^2.14.0
     constructs: ^10.0.74
+    typescript: ^4.6.2
   peerDependencies:
     "@aws-cdk/aws-apigatewayv2-alpha": "*"
     "@aws-cdk/aws-apigatewayv2-authorizers-alpha": "*"
@@ -484,7 +489,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cloudshape/core@workspace:packages/core"
   dependencies:
+    "@tsconfig/node16-strictest": ^1.0.0
     ajv: ^8.10.0
+    typescript: ^4.6.2
   languageName: unknown
   linkType: soft
 
@@ -999,9 +1006,9 @@ __metadata:
   linkType: hard
 
 "@types/yargs-parser@npm:*":
-  version: 20.2.1
-  resolution: "@types/yargs-parser@npm:20.2.1"
-  checksum: 1d039e64494a7a61ddd278349a3dc60b19f99ff0517425696e796f794e4252452b9d62178e69755ad03f439f9dc0c8c3d7b3a1201b3a24e134bac1a09fa11eaa
+  version: 21.0.0
+  resolution: "@types/yargs-parser@npm:21.0.0"
+  checksum: b2f4c8d12ac18a567440379909127cf2cec393daffb73f246d0a25df36ea983b93b7e9e824251f959e9f928cbc7c1aab6728d0a0ff15d6145f66cec2be67d9a2
   languageName: node
   linkType: hard
 
@@ -1198,7 +1205,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"agentkeepalive@npm:^4.2.0":
+"agentkeepalive@npm:^4.2.1":
   version: 4.2.1
   resolution: "agentkeepalive@npm:4.2.1"
   dependencies:
@@ -1348,7 +1355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:^2.13.0, aws-cdk-lib@npm:^2.14.0":
+"aws-cdk-lib@npm:^2.14.0":
   version: 2.15.0
   resolution: "aws-cdk-lib@npm:2.15.0"
   dependencies:
@@ -1368,8 +1375,8 @@ __metadata:
   linkType: hard
 
 "aws-sdk@npm:^2.1083.0":
-  version: 2.1084.0
-  resolution: "aws-sdk@npm:2.1084.0"
+  version: 2.1085.0
+  resolution: "aws-sdk@npm:2.1085.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -1380,7 +1387,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 1854bd426ee604eacc37740b0bb47b13cd40893de076d8118e91780350293d06acdad649e84aa843d4c4c140d6ec90191fe6b41665c6e16c8e502df37e7d1e0b
+  checksum: 0545a4a4459b78773b87407e4a163bbe83cee52568121549506db5d4ab1caecb7abcd6d40208638fc24599c7df256944e4d265e039fc8976714c23426aaf53a8
   languageName: node
   linkType: hard
 
@@ -1675,24 +1682,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cloudshape@workspace:."
   dependencies:
-    "@tsconfig/node16-strictest": ^1.0.0
     "@types/eslint": ^8
     "@types/jest": ^27.4.1
-    "@types/node": ^17.0.21
     "@types/prettier": ^2
     "@typescript-eslint/eslint-plugin": ^5.12.1
     "@typescript-eslint/parser": ^5.12.1
-    aws-cdk-lib: ^2.13.0
-    constructs: ^10.0.71
     eslint: ^8.9.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
     jest: ^27.5.1
     prettier: 2.5.1
-    typescript: ^4.5.5
-  peerDependencies:
-    aws-cdk-lib: "*"
-    constructs: "*"
+    typescript: ^4.6.2
   languageName: unknown
   linkType: soft
 
@@ -1774,10 +1774,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"constructs@npm:^10.0.71, constructs@npm:^10.0.74":
-  version: 10.0.75
-  resolution: "constructs@npm:10.0.75"
-  checksum: d73d58f3cef215395bf037ee36279e6bb9ce935bb861835abb223e6d2096bb70fbe6432114a815bfa4b91c44909f25f6e1f02784a180f121ffb1e9134104f7b0
+"constructs@npm:^10.0.74":
+  version: 10.0.77
+  resolution: "constructs@npm:10.0.77"
+  checksum: cca9a03e59527fe1f49481975e32c993d25848992e5a36fd731e7ebe9aa2066d5c9a38af7696cf96bcd9e9cfaa08eed24d49045adeb644919c80574bd7569cb3
   languageName: node
   linkType: hard
 
@@ -1965,7 +1965,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"encoding@npm:^0.1.12":
+"encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
   dependencies:
@@ -2045,13 +2045,13 @@ __metadata:
   linkType: hard
 
 "eslint-config-prettier@npm:^8.4.0":
-  version: 8.4.0
-  resolution: "eslint-config-prettier@npm:8.4.0"
+  version: 8.5.0
+  resolution: "eslint-config-prettier@npm:8.5.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: ee8dc343f1fed15dc0658e190a966cc23644477f2331a7f56ae2bb79dd74892e3cde8ea5c142e7a3329a8291a1de041e13ca96e54d0c85ff4a2aba13390c5f10
+  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
   languageName: node
   linkType: hard
 
@@ -3616,7 +3616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^7.3.1":
+"lru-cache@npm:^7.4.0":
   version: 7.4.0
   resolution: "lru-cache@npm:7.4.0"
   checksum: f966d8b6832ae4b6d454b96b5814a81fdd7312d393208c8ff1456981bafa7c6d5e28f8814813ec196ffac4e33a57c22c7daa24e79192f4c7f0b16acb1b9e7ed1
@@ -3633,26 +3633,26 @@ __metadata:
   linkType: hard
 
 "make-fetch-happen@npm:^10.0.3":
-  version: 10.0.3
-  resolution: "make-fetch-happen@npm:10.0.3"
+  version: 10.0.4
+  resolution: "make-fetch-happen@npm:10.0.4"
   dependencies:
-    agentkeepalive: ^4.2.0
+    agentkeepalive: ^4.2.1
     cacache: ^15.3.0
     http-cache-semantics: ^4.1.0
     http-proxy-agent: ^5.0.0
     https-proxy-agent: ^5.0.0
     is-lambda: ^1.0.1
-    lru-cache: ^7.3.1
+    lru-cache: ^7.4.0
     minipass: ^3.1.6
     minipass-collect: ^1.0.2
-    minipass-fetch: ^1.4.1
+    minipass-fetch: ^2.0.1
     minipass-flush: ^1.0.5
     minipass-pipeline: ^1.2.4
     negotiator: ^0.6.3
     promise-retry: ^2.0.1
     socks-proxy-agent: ^6.1.1
     ssri: ^8.0.1
-  checksum: edf3ba5119c7cf528485dbeafd14dc84c01c97038c13696d20ff5edb5274d9fddc418be3dffe7c542f7dc4691dc221e9faf913b207f6ccb7c81b43f479525c0c
+  checksum: 036fcfaec18b69ce6384644275850b0871aff105663aecc0130b5c45fe318542d7e2004cf1f4cd26b7c6842c282f8b37f00da67aa3bae13c13693e405480ac74
   languageName: node
   linkType: hard
 
@@ -3737,18 +3737,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass-fetch@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "minipass-fetch@npm:1.4.1"
+"minipass-fetch@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "minipass-fetch@npm:2.0.2"
   dependencies:
-    encoding: ^0.1.12
-    minipass: ^3.1.0
+    encoding: ^0.1.13
+    minipass: ^3.1.6
     minipass-sized: ^1.0.3
-    minizlib: ^2.0.0
+    minizlib: ^2.1.2
   dependenciesMeta:
     encoding:
       optional: true
-  checksum: ec93697bdb62129c4e6c0104138e681e30efef8c15d9429dd172f776f83898471bc76521b539ff913248cc2aa6d2b37b652c993504a51cc53282563640f29216
+  checksum: 0613b0a6ef427609707c2b73b69230348fe3c24b33c144622e8e248404534fa1f125b94c324c555cd665ef623abedab0f7891e460b1c9ac6babc3ab2385b3c18
   languageName: node
   linkType: hard
 
@@ -3779,7 +3779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass@npm:^3.0.0, minipass@npm:^3.1.0, minipass@npm:^3.1.1, minipass@npm:^3.1.6":
+"minipass@npm:^3.0.0, minipass@npm:^3.1.1, minipass@npm:^3.1.6":
   version: 3.1.6
   resolution: "minipass@npm:3.1.6"
   dependencies:
@@ -3788,7 +3788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minizlib@npm:^2.0.0, minizlib@npm:^2.1.1":
+"minizlib@npm:^2.1.1, minizlib@npm:^2.1.2":
   version: 2.1.2
   resolution: "minizlib@npm:2.1.2"
   dependencies:
@@ -4774,7 +4774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.5.5":
+"typescript@npm:^4.6.2":
   version: 4.6.2
   resolution: "typescript@npm:4.6.2"
   bin:
@@ -4784,7 +4784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.5.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.2#~builtin<compat/typescript>":
   version: 4.6.2
   resolution: "typescript@patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"
   bin:

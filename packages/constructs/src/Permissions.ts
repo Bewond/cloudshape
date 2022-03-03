@@ -21,9 +21,9 @@ export interface Permission {
 
 export function PermissionsMixin<T extends Constructor>(Base: T) {
   return class extends Base {
-    private constructRole?: iam.Role;
-    private policyScope?: Construct;
-    private policyId?: string;
+    public constructRole?: iam.Role;
+    public policyScope?: Construct;
+    public policyId?: string;
 
     /**
      * @summary Initialize PermissionsMixin data.
