@@ -5,12 +5,8 @@
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"],
-  "exclude": ["dist/**/", "test/**/*"],
-  "references": [
-    { "path": "../../constructs" },
-    { "path": "../../core" }
-  ]
+  "references": [{ "path": "../../constructs" }, { "path": "../../core" }]
 }
