@@ -1,8 +1,0 @@
-{
-  "extends": "@tsconfig/node16-strictest/tsconfig.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["packages/**/*"],
-  "exclude": ["**/*.spec.ts", "cdk.out"]
-}

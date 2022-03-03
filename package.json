@@ -3,9 +3,6 @@
   "description": "Cloudshape enables infrastructure as code through a collection of powerful constructs that are easy to use and extend.",
   "private": true,
   "scripts": {
-    "build": "tsc -b",
-    "watch": "tsc -b -w",
-    "clean": "tsc -b --clean",
     "lint": "eslint . --fix --ext .js,.ts",
     "format": "prettier . --write",
     "test": "jest --coverage --passWithNoTests"
@@ -21,23 +18,16 @@
     "packages/services/*"
   ],
   "devDependencies": {
-    "@tsconfig/node16-strictest": "^1.0.0",
     "@types/eslint": "^8",
     "@types/jest": "^27.4.1",
     "@types/prettier": "^2",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
-    "aws-cdk-lib": "^2.13.0",
-    "constructs": "^10.0.71",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-jest": "^26.1.1",
     "jest": "^27.5.1",
     "prettier": "2.5.1",
-    "typescript": "^4.5.5"
-  },
-  "peerDependencies": {
-    "aws-cdk-lib": "*",
-    "constructs": "*"
+    "typescript": "^4.6.2"
   }
 }

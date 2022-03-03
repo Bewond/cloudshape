@@ -1,4 +1,29 @@
 {
   "name": "@cloudshape/constructs",
-  "packageManager": "yarn@3.2.0"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "packageManager": "yarn@3.2.0",
+  "devDependencies": {
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.15.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-authorizers-alpha": "^2.15.0-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.15.0-alpha.0",
+    "@tsconfig/node16-strictest": "^1.0.0",
+    "aws-cdk-lib": "^2.14.0",
+    "constructs": "^10.0.74",
+    "typescript": "^4.6.2"
+  },
+  "peerDependencies": {
+    "@aws-cdk/aws-apigatewayv2-alpha": "*",
+    "@aws-cdk/aws-apigatewayv2-authorizers-alpha": "*",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "*",
+    "aws-cdk-lib": "*",
+    "constructs": "*"
+  }
 }
