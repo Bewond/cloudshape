@@ -2,6 +2,9 @@
   "name": "@cloudshape-services/users",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean"
