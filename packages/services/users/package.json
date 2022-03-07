@@ -3,7 +3,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/"
+    "dist/",
+    "src/functions",
+    "src/triggers"
   ],
   "scripts": {
     "build": "tsc --build",
