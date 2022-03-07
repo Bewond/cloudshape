@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
 const aws_sdk_1 = require("aws-sdk");
-const crypto_secure_random_digit_1 = require("crypto-secure-random-digit");
+const crypto_1 = require("crypto");
 const process_1 = require("process");
 const handler = async (event) => {
     let secretLoginCode;
@@ -16,7 +16,7 @@ const handler = async (event) => {
     // New session:
     else if (event.request.userAttributes["email"]) {
         // Generate a new secret login code and send it to the user.
-        secretLoginCode = (0, crypto_secure_random_digit_1.randomDigits)(6).join("");
+        secretLoginCode = (0, crypto_1.randomInt)(100000, 999999).toString();
         await sendEmail(event.request.userAttributes["email"], secretLoginCode);
     }
     if (secretLoginCode) {
