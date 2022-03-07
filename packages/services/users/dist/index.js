@@ -63,7 +63,7 @@ class UsersService extends constructs_2.Construct {
             path: "/users/auth/email",
             method: constructs_1.HttpMethod.POST,
             handler: new constructs_1.Function(this, "postUsersAuthEmail", {
-                entry: path.join(__dirname, `/functions/post-users-auth-email.ts`),
+                entry: path.join(__dirname, `/functions/post-users-auth-email.js`),
                 environment: environment,
                 permissions: {
                     actions: ["cognito-idp:ListUsers", "cognito-idp:SignUp", "cognito-idp:AdminInitiateAuth"],
@@ -76,7 +76,7 @@ class UsersService extends constructs_2.Construct {
             path: "/users/auth/email",
             method: constructs_1.HttpMethod.PUT,
             handler: new constructs_1.Function(this, "putUsersAuthEmail", {
-                entry: path.join(__dirname, `/functions/put-users-auth-email.ts`),
+                entry: path.join(__dirname, `/functions/put-users-auth-email.js`),
                 environment: environment,
                 permissions: {
                     actions: ["cognito-idp:AdminRespondToAuthChallenge"],
@@ -90,7 +90,7 @@ class UsersService extends constructs_2.Construct {
           method: HttpMethod.GET,
           authorizer: authorizer,
           handler: new Function(this, "getUsers", {
-            entry: path.join(__dirname, `/functions/get-users.ts`),
+            entry: path.join(__dirname, `/functions/get-users.js`),
           }),
         });*/
         return authAPI;
@@ -100,12 +100,12 @@ class UsersService extends constructs_2.Construct {
         // should be presented to the user in which order. At the end, it reports back to the user pool
         // if the user succeeded or failed authentication.
         const defineChallengeFunction = new constructs_1.Function(this, "defineChallengeFunction", {
-            entry: path.join(__dirname, `/triggers/define-challenge.ts`),
+            entry: path.join(__dirname, `/triggers/define-challenge.js`),
         });
         // This function is invoked to create a unique challenge for the user.
         // Generate a one-time login code and mail it to the user.
         const createChallengeFunction = new constructs_1.Function(this, "createChallengeFunction", {
-            entry: path.join(__dirname, `/triggers/create-challenge.ts`),
+            entry: path.join(__dirname, `/triggers/create-challenge.js`),
             environment: {
                 emailSource: props.emailSource,
                 messageSubject: props.messageSubject ?? `Your secret login code`,
@@ -126,11 +126,11 @@ class UsersService extends constructs_2.Construct {
         // This function is invoked by the user pool when the user
         // provides the answer to the challenge to determine if that answer is correct.
         const verifyChallengeFunction = new constructs_1.Function(this, "verifyChallengeFunction", {
-            entry: path.join(__dirname, `/triggers/verify-challenge.ts`),
+            entry: path.join(__dirname, `/triggers/verify-challenge.js`),
         });
         // This function auto-confirms users and their email addresses during signup.
         const preAuthFunction = new constructs_1.Function(this, "preAuthFunction", {
-            entry: path.join(__dirname, `/triggers/pre-auth.ts`),
+            entry: path.join(__dirname, `/triggers/pre-auth.js`),
         });
         return new constructs_1.Auth(this, "authUserPool", {
             selfSignUpEnabled: true,
