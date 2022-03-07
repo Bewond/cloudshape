@@ -46,12 +46,13 @@ class API extends gateway.HttpApi {
             description: props.description ?? "",
             corsPreflight: props.cors ?? { allowOrigins: ["*"] },
         });
+        this.id = id;
     }
     /**
      * Add API route.
      */
     addRoute(route) {
-        const integration = new integrations.HttpLambdaIntegration(`${this.apiId}RouteIntegration`, route.handler);
+        const integration = new integrations.HttpLambdaIntegration(`${this.id}RouteIntegration`, route.handler);
         this.addRoutes({
             ...route,
             path: route.path,

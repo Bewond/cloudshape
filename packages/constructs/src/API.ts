@@ -78,6 +78,11 @@ export const noneAuthorizer = new gateway.HttpNoneAuthorizer();
  * @summary API gateway construct.
  */
 export class API extends gateway.HttpApi {
+  /**
+   * Scope-unique constructor id.
+   */
+  private readonly id: string;
+
   constructor(scope: Construct, id: string, props: APIProps = {}) {
     super(scope, id, {
       ...props,
@@ -85,6 +90,8 @@ export class API extends gateway.HttpApi {
       description: props.description ?? "",
       corsPreflight: props.cors ?? { allowOrigins: ["*"] },
     });
+
+    this.id = id;
   }
 
   /**
@@ -92,7 +99,7 @@ export class API extends gateway.HttpApi {
    */
   addRoute(route: APIRoute): void {
     const integration = new integrations.HttpLambdaIntegration(
-      `${this.apiId}RouteIntegration`,
+      `${this.id}RouteIntegration`,
       route.handler
     );
 

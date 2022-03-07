@@ -65,6 +65,10 @@ export declare const noneAuthorizer: gateway.HttpNoneAuthorizer;
  * @summary API gateway construct.
  */
 export declare class API extends gateway.HttpApi {
+    /**
+     * Scope-unique constructor id.
+     */
+    private readonly id;
     constructor(scope: Construct, id: string, props?: APIProps);
     /**
      * Add API route.
