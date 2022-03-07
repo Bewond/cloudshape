@@ -43,7 +43,6 @@ class API extends gateway.HttpApi {
         super(scope, id, {
             ...props,
             apiName: props.name ?? id,
-            description: props.description ?? "",
             corsPreflight: props.cors ?? { allowOrigins: ["*"] },
         });
         this.id = id;
