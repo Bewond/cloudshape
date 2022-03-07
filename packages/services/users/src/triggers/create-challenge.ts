@@ -1,6 +1,6 @@
 import type { CreateAuthChallengeTriggerHandler } from "aws-lambda";
 import { SES } from "aws-sdk";
-import { randomDigits } from "crypto-secure-random-digit";
+import { randomInt } from "crypto";
 import { env } from "process";
 
 export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
@@ -16,7 +16,7 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
   // New session:
   else if (event.request.userAttributes["email"]) {
     // Generate a new secret login code and send it to the user.
-    secretLoginCode = randomDigits(6).join("");
+    secretLoginCode = randomInt(100000, 999999).toString();
     await sendEmail(event.request.userAttributes["email"], secretLoginCode);
   }
 
