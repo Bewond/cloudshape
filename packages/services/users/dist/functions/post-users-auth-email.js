@@ -26,7 +26,9 @@ const handler = async (event) => {
             },
         },
     });
-    return await validator.validate(event, main, process.env);
+    const result = await validator.validate(event, main, process.env);
+    console.log("result:", JSON.stringify(result, null, 2));
+    return result;
 };
 exports.handler = handler;
 async function main(request, env) {
