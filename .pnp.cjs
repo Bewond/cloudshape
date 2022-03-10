@@ -941,6 +941,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/aws-lambda", "npm:8.10.93"],\
             ["@types/node", "npm:17.0.21"],\
+            ["ajv", "npm:8.10.0"],\
             ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
             ["aws-sdk", "npm:2.1088.0"],\
             ["constructs", "npm:10.0.81"],\
