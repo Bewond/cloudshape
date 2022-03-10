@@ -6,7 +6,7 @@ const crypto_1 = require("crypto");
 const handler = async (event) => {
     console.log("event:", JSON.stringify(event, null, 2));
     const body = JSON.parse(event.body ?? "{}");
-    const result = main({ email: body["email"] }, {
+    const result = await main({ email: body["email"] }, {
         userPoolId: process.env["userPoolId"],
         userPoolClientId: process.env["userPoolClientId"],
     });
