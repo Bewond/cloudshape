@@ -19,6 +19,12 @@ export interface APIResult {
      */
     statusCode: number;
     /**
+     * HTTP header fields.
+     */
+    headers?: {
+        [header: string]: string;
+    };
+    /**
      * Optional body containing data.
      *
      * @default - none

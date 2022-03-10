@@ -31,6 +31,7 @@ class APIValidator {
             if (!validateEnvironment(environment)) {
                 return {
                     statusCode: 500,
+                    headers: { "content-type": "application/json" },
                     body: JSON.stringify(validateEnvironment.errors),
                 };
             }
@@ -45,12 +46,14 @@ class APIValidator {
             if (validateResponse(response)) {
                 return {
                     statusCode: 200,
+                    headers: { "content-type": "application/json" },
                     body: JSON.stringify(response),
                 };
             }
             else {
                 return {
                     statusCode: 500,
+                    headers: { "content-type": "application/json" },
                     body: JSON.stringify(validateResponse.errors),
                 };
             }
@@ -58,6 +61,7 @@ class APIValidator {
         else {
             return {
                 statusCode: 400,
+                headers: { "content-type": "application/json" },
                 body: JSON.stringify(validateRequest.errors),
             };
         }

@@ -1,4 +1,4 @@
-//import { APIValidator } from "@cloudshape/core";
+import { APIValidator } from "@cloudshape/core";
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import { CognitoIdentityServiceProvider } from "aws-sdk";
 import { randomBytes } from "crypto";
@@ -7,11 +7,11 @@ interface Request {
   email: string;
 }
 
-/*interface Response {
+interface Response {
   userId: string;
   email: string;
   session: string;
-}*/
+}
 
 interface Environment {
   userPoolId: string;
@@ -21,7 +21,7 @@ interface Environment {
 export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
   console.log("event:", JSON.stringify(event, null, 2));
 
-  const body = JSON.parse(event.body ?? "{}");
+  /*const body = JSON.parse(event.body ?? "{}");
   const result = await main(
     { email: body["email"]! },
     {
@@ -32,10 +32,13 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
 
   return {
     statusCode: 200,
+    headers: {
+      "content-type": "application/json",
+    },
     body: JSON.stringify(result),
-  };
+  };*/
 
-  /*const validator = new APIValidator<Request, Response, Environment>({
+  const validator = new APIValidator<Request, Response, Environment>({
     requestSchema: {
       properties: {
         email: { type: "string" },
@@ -56,21 +59,10 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  let result;
-
-  try {
-    result = await validator.validate(event, main, process.env);
-  } catch (e) {
-    console.log("Error: ", JSON.stringify(e, null, 2));
-  }
+  const result = await validator.validate(event, main, process.env);
 
   console.log("result:", JSON.stringify(result, null, 2));
-  return (
-    result ?? {
-      statusCode: 200,
-      body: "null",
-    }
-  );*/
+  return result;
 };
 
 async function main(request: Request, env: Environment): Promise<unknown> {

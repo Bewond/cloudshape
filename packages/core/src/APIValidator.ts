@@ -23,6 +23,13 @@ export interface APIResult {
   statusCode: number;
 
   /**
+   * HTTP header fields.
+   */
+  headers?: {
+    [header: string]: string;
+  };
+
+  /**
    * Optional body containing data.
    *
    * @default - none
@@ -86,6 +93,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       if (!validateEnvironment(environment)) {
         return {
           statusCode: 500,
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(validateEnvironment.errors),
         };
       }
@@ -103,17 +111,20 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       if (validateResponse(response)) {
         return {
           statusCode: 200,
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(response),
         };
       } else {
         return {
           statusCode: 500,
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(validateResponse.errors),
         };
       }
     } else {
       return {
         statusCode: 400,
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(validateRequest.errors),
       };
     }

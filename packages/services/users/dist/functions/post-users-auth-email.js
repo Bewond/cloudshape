@@ -1,55 +1,50 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
+const core_1 = require("@cloudshape/core");
 const aws_sdk_1 = require("aws-sdk");
 const crypto_1 = require("crypto");
 const handler = async (event) => {
     console.log("event:", JSON.stringify(event, null, 2));
-    const body = JSON.parse(event.body ?? "{}");
-    const result = await main({ email: body["email"] }, {
-        userPoolId: process.env["userPoolId"],
-        userPoolClientId: process.env["userPoolClientId"],
-    });
-    return {
-        statusCode: 200,
-        body: JSON.stringify(result),
-    };
-    /*const validator = new APIValidator<Request, Response, Environment>({
-      requestSchema: {
-        properties: {
-          email: { type: "string" },
-        },
-      },
-      responseSchema: {
-        properties: {
-          userId: { type: "string" },
-          email: { type: "string" },
-          session: { type: "string" },
-        },
-      },
-      environmentSchema: {
-        properties: {
-          userPoolId: { type: "string" },
-          userPoolClientId: { type: "string" },
-        },
-      },
-    });
-  
-    let result;
-  
-    try {
-      result = await validator.validate(event, main, process.env);
-    } catch (e) {
-      console.log("Error: ", JSON.stringify(e, null, 2));
-    }
-  
-    console.log("result:", JSON.stringify(result, null, 2));
-    return (
-      result ?? {
-        statusCode: 200,
-        body: "null",
+    /*const body = JSON.parse(event.body ?? "{}");
+    const result = await main(
+      { email: body["email"]! },
+      {
+        userPoolId: process.env["userPoolId"]!,
+        userPoolClientId: process.env["userPoolClientId"]!,
       }
-    );*/
+    );
+  
+    return {
+      statusCode: 200,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(result),
+    };*/
+    const validator = new core_1.APIValidator({
+        requestSchema: {
+            properties: {
+                email: { type: "string" },
+            },
+        },
+        responseSchema: {
+            properties: {
+                userId: { type: "string" },
+                email: { type: "string" },
+                session: { type: "string" },
+            },
+        },
+        environmentSchema: {
+            properties: {
+                userPoolId: { type: "string" },
+                userPoolClientId: { type: "string" },
+            },
+        },
+    });
+    const result = await validator.validate(event, main, process.env);
+    console.log("result:", JSON.stringify(result, null, 2));
+    return result;
 };
 exports.handler = handler;
 async function main(request, env) {

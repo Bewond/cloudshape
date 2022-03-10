@@ -34,7 +34,7 @@ const handler = async (event) => {
 };
 exports.handler = handler;
 async function sendEmail(emailAddress, secretLoginCode) {
-    const regexp = new RegExp("$secretCode", "g");
+    const varname = "$secretCode";
     if (process_1.env["emailSource"] && process_1.env["messageSubject"] && process_1.env["messageText"] && process_1.env["messageHtml"])
         await new aws_sdk_1.SES()
             .sendEmail({
@@ -42,14 +42,14 @@ async function sendEmail(emailAddress, secretLoginCode) {
             Destination: { ToAddresses: [emailAddress] },
             Message: {
                 Subject: {
-                    Data: process_1.env["messageSubject"].replace(regexp, secretLoginCode),
+                    Data: process_1.env["messageSubject"].replace(varname, secretLoginCode),
                 },
                 Body: {
                     Text: {
-                        Data: process_1.env["messageText"].replace(regexp, secretLoginCode),
+                        Data: process_1.env["messageText"].replace(varname, secretLoginCode),
                     },
                     Html: {
-                        Data: process_1.env["messageHtml"].replace(regexp, secretLoginCode),
+                        Data: process_1.env["messageHtml"].replace(varname, secretLoginCode),
                     },
                 },
             },

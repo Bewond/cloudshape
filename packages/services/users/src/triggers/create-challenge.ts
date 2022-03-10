@@ -38,7 +38,7 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
 };
 
 async function sendEmail(emailAddress: string, secretLoginCode: string) {
-  const regexp = new RegExp("$secretCode", "g");
+  const varname = "$secretCode";
 
   if (env["emailSource"] && env["messageSubject"] && env["messageText"] && env["messageHtml"])
     await new SES()
@@ -47,14 +47,14 @@ async function sendEmail(emailAddress: string, secretLoginCode: string) {
         Destination: { ToAddresses: [emailAddress] },
         Message: {
           Subject: {
-            Data: env["messageSubject"].replace(regexp, secretLoginCode),
+            Data: env["messageSubject"].replace(varname, secretLoginCode),
           },
           Body: {
             Text: {
-              Data: env["messageText"].replace(regexp, secretLoginCode),
+              Data: env["messageText"].replace(varname, secretLoginCode),
             },
             Html: {
-              Data: env["messageHtml"].replace(regexp, secretLoginCode),
+              Data: env["messageHtml"].replace(varname, secretLoginCode),
             },
           },
         },
