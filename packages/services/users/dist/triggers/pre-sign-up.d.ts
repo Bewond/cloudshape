@@ -1,3 +1,3 @@
 import type { PreSignUpTriggerHandler } from "aws-lambda";
 export declare const handler: PreSignUpTriggerHandler;
-//# sourceMappingURL=pre-auth.d.ts.map
+//# sourceMappingURL=pre-sign-up.d.ts.map

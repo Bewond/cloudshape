@@ -55,10 +55,8 @@ export class Auth extends cognito.UserPool {
   constructor(scope: Construct, id: string, props: AuthProps = {}) {
     super(scope, id, {
       ...props,
-      selfSignUpEnabled: props.selfSignUpEnabled ?? false,
       signInAliases: props.signInAliases ?? { email: true },
       standardAttributes: props.standardAttributes ?? { email: { required: true, mutable: true } },
-      lambdaTriggers: props.lambdaTriggers ?? {},
       signInCaseSensitive: props.signInCaseSensitive ?? false,
     });
   }

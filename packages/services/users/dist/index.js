@@ -129,8 +129,8 @@ class UsersService extends constructs_2.Construct {
             entry: path.join(__dirname, `/triggers/verify-challenge.js`),
         });
         // This function auto-confirms users and their email addresses during signup.
-        const preAuthFunction = new constructs_1.Function(this, "preAuthFunction", {
-            entry: path.join(__dirname, `/triggers/pre-auth.js`),
+        const preSignUpFunction = new constructs_1.Function(this, "preSignUpFunction", {
+            entry: path.join(__dirname, `/triggers/pre-sign-up.js`),
         });
         return new constructs_1.Auth(this, "authUserPool", {
             selfSignUpEnabled: true,
@@ -138,7 +138,7 @@ class UsersService extends constructs_2.Construct {
                 defineAuthChallenge: defineChallengeFunction,
                 createAuthChallenge: createChallengeFunction,
                 verifyAuthChallengeResponse: verifyChallengeFunction,
-                preAuthentication: preAuthFunction,
+                preSignUp: preSignUpFunction,
             },
         });
     }

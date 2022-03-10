@@ -7,4 +7,4 @@ const handler = async (event) => {
     return event;
 };
 exports.handler = handler;
-//# sourceMappingURL=pre-auth.js.map
+//# sourceMappingURL=pre-sign-up.js.map

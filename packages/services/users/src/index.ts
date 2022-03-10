@@ -153,8 +153,8 @@ export class UsersService extends Construct {
     });
 
     // This function auto-confirms users and their email addresses during signup.
-    const preAuthFunction = new Function(this, "preAuthFunction", {
-      entry: path.join(__dirname, `/triggers/pre-auth.js`),
+    const preSignUpFunction = new Function(this, "preSignUpFunction", {
+      entry: path.join(__dirname, `/triggers/pre-sign-up.js`),
     });
 
     return new Auth(this, "authUserPool", {
@@ -163,7 +163,7 @@ export class UsersService extends Construct {
         defineAuthChallenge: defineChallengeFunction,
         createAuthChallenge: createChallengeFunction,
         verifyAuthChallengeResponse: verifyChallengeFunction,
-        preAuthentication: preAuthFunction,
+        preSignUp: preSignUpFunction,
       },
     });
   }

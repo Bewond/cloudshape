@@ -1,1 +1,0 @@
-{"version":3,"file":"pre-auth.js","sourceRoot":"","sources":["../../src/triggers/pre-auth.ts"],"names":[],"mappings":";;;AAEO,MAAM,OAAO,GAA4B,KAAK,EAAE,KAAK,EAAE,EAAE;IAC9D,KAAK,CAAC,QAAQ,CAAC,eAAe,GAAG,IAAI,CAAC;IACtC,KAAK,CAAC,QAAQ,CAAC,eAAe,GAAG,IAAI,CAAC;IAEtC,OAAO,KAAK,CAAC;AACf,CAAC,CAAC;AALW,QAAA,OAAO,WAKlB"}
