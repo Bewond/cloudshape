@@ -100,6 +100,8 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
   ): Promise<APIResult> {
     const ajv = new Ajv();
 
+    console.log("OK1");
+
     // Validate environment variables.
     if (environment && this.data.environmentSchema) {
       const validateEnvironment = ajv.compile(this.data.environmentSchema);
@@ -109,12 +111,16 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       }
     }
 
+    console.log("OK2");
+
     // Validate request.
     const request = JSON.parse(event.body ?? "{}");
     const validateRequest = ajv.compile(this.data.requestSchema);
 
     if (validateRequest(request)) {
       let response = {};
+
+      console.log("OK3");
 
       // Handle the API request.
       try {
@@ -123,10 +129,13 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
         return this.result(500, error);
       }
 
+      console.log("OK4");
+
       // Validate response.
       const validateResponse = ajv.compile(this.data.responseSchema);
 
       if (validateResponse(response)) {
+        console.log("OK5");
         return this.result(200, response);
       } else {
         return this.result(500, validateResponse.errors);
@@ -138,6 +147,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private result(code: number, body: any): APIResult {
+    console.log("WOW");
     return {
       statusCode: code,
       headers: { "content-type": "application/json" },
@@ -203,6 +213,8 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
       },
     },
   });
+
+  console.log("OK0");
 
   const result = await validator.validate(event, main, process.env);
 

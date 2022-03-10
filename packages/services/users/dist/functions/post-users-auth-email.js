@@ -28,6 +28,7 @@ class APIValidator {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment) {
         const ajv = new jtd_1.default();
+        console.log("OK1");
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
             const validateEnvironment = ajv.compile(this.data.environmentSchema);
@@ -35,11 +36,13 @@ class APIValidator {
                 return this.result(500, validateEnvironment.errors);
             }
         }
+        console.log("OK2");
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
         const validateRequest = ajv.compile(this.data.requestSchema);
         if (validateRequest(request)) {
             let response = {};
+            console.log("OK3");
             // Handle the API request.
             try {
                 response = await handler(request, environment ?? {});
@@ -47,9 +50,11 @@ class APIValidator {
             catch (error) {
                 return this.result(500, error);
             }
+            console.log("OK4");
             // Validate response.
             const validateResponse = ajv.compile(this.data.responseSchema);
             if (validateResponse(response)) {
+                console.log("OK5");
                 return this.result(200, response);
             }
             else {
@@ -62,6 +67,7 @@ class APIValidator {
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     result(code, body) {
+        console.log("WOW");
         return {
             statusCode: code,
             headers: { "content-type": "application/json" },
@@ -108,6 +114,7 @@ const handler = async (event) => {
             },
         },
     });
+    console.log("OK0");
     const result = await validator.validate(event, main, process.env);
     console.log("result:", JSON.stringify(result, null, 2));
     return result;
