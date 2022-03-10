@@ -1,9 +1,15 @@
 import { JTDSchemaType } from "ajv/dist/jtd";
 /**
+ * Constructs a type with all properties of T set to optional or undefined.
+ */
+export declare type Draft<T> = {
+    [P in keyof T]?: T[P] | undefined;
+};
+/**
  * Function that processes the validated API request.
  */
-export declare type APIFunction<RequestType, EnvironmentType> = {
-    (request: RequestType, env: EnvironmentType): Promise<unknown>;
+export declare type APIFunction<Request, Response, Environment> = {
+    (request: Request, env: Environment): Promise<Draft<Response>>;
 };
 export interface APIEvent {
     /**
@@ -36,19 +42,19 @@ export interface APIResult {
  *
  * @see https://ajv.js.org/json-type-definition.html
  */
-export interface APIValidatorData<RequestType, ResponseType, EnvironmentType> {
+export interface APIValidatorData<Request, Response, Environment> {
     /**
      * Schema used to validate the request.
      */
-    requestSchema: JTDSchemaType<RequestType>;
+    requestSchema: JTDSchemaType<Request>;
     /**
      * Schema used to validate the response.
      */
-    responseSchema: JTDSchemaType<ResponseType>;
+    responseSchema: JTDSchemaType<Response>;
     /**
      * Schema used to validate environment variables.
      */
-    environmentSchema?: JTDSchemaType<EnvironmentType>;
+    environmentSchema?: JTDSchemaType<Environment>;
 }
 /**
  * @summary Validator of an API handler.
@@ -65,6 +71,7 @@ export declare class APIValidator<RequestType, ResponseType, EnvironmentType> {
      * @param environment - environment variables.
      * @returns the result of the handler's execution.
      */
-    validate(event: APIEvent, handler: APIFunction<RequestType, EnvironmentType>, environment?: any): Promise<APIResult>;
+    validate(event: APIEvent, handler: APIFunction<RequestType, ResponseType, EnvironmentType>, environment?: any): Promise<APIResult>;
+    private result;
 }
 //# sourceMappingURL=APIValidator.d.ts.map

@@ -1,4 +1,4 @@
-import { APIValidator } from "@cloudshape/core";
+import { APIValidator, Draft } from "@cloudshape/core";
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import { CognitoIdentityServiceProvider } from "aws-sdk";
 
@@ -10,8 +10,8 @@ interface Request {
 
 interface Response {
   accessToken: string;
-  tokenType: number;
-  expiresIn: string;
+  tokenType: string;
+  expiresIn: number;
   idToken: string;
   refreshToken: string;
 }
@@ -35,8 +35,8 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     responseSchema: {
       properties: {
         accessToken: { type: "string" },
-        tokenType: { type: "uint16" },
-        expiresIn: { type: "string" },
+        tokenType: { type: "string" },
+        expiresIn: { type: "uint16" },
         idToken: { type: "string" },
         refreshToken: { type: "string" },
       },
@@ -55,7 +55,7 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
   return result;
 };
 
-async function main(request: Request, env: Environment): Promise<unknown> {
+async function main(request: Request, env: Environment): Promise<Draft<Response>> {
   const identityService = new CognitoIdentityServiceProvider();
 
   const challengeResponse = await identityService

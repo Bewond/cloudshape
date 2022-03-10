@@ -16,8 +16,8 @@ const handler = async (event) => {
         responseSchema: {
             properties: {
                 accessToken: { type: "string" },
-                tokenType: { type: "uint16" },
-                expiresIn: { type: "string" },
+                tokenType: { type: "string" },
+                expiresIn: { type: "uint16" },
                 idToken: { type: "string" },
                 refreshToken: { type: "string" },
             },

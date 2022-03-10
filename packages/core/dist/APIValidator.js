@@ -29,42 +29,41 @@ class APIValidator {
         if (environment && this.data.environmentSchema) {
             const validateEnvironment = ajv.compile(this.data.environmentSchema);
             if (!validateEnvironment(environment)) {
-                return {
-                    statusCode: 500,
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify(validateEnvironment.errors),
-                };
+                return this.result(500, validateEnvironment.errors);
             }
         }
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
         const validateRequest = ajv.compile(this.data.requestSchema);
         if (validateRequest(request)) {
+            let response = {};
+            // Handle the API request.
+            try {
+                response = await handler(request, environment ?? {});
+            }
+            catch (error) {
+                return this.result(500, error);
+            }
             // Validate response.
-            const response = await handler(request, environment ?? {});
             const validateResponse = ajv.compile(this.data.responseSchema);
             if (validateResponse(response)) {
-                return {
-                    statusCode: 200,
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify(response),
-                };
+                return this.result(200, response);
             }
             else {
-                return {
-                    statusCode: 500,
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify(validateResponse.errors),
-                };
+                return this.result(500, validateResponse.errors);
             }
         }
         else {
-            return {
-                statusCode: 400,
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(validateRequest.errors),
-            };
+            return this.result(400, validateRequest.errors);
         }
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    result(code, body) {
+        return {
+            statusCode: code,
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body),
+        };
     }
 }
 exports.APIValidator = APIValidator;

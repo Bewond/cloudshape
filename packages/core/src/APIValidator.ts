@@ -1,10 +1,17 @@
 import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
 
 /**
+ * Constructs a type with all properties of T set to optional or undefined.
+ */
+export type Draft<T> = {
+  [P in keyof T]?: T[P] | undefined;
+};
+
+/**
  * Function that processes the validated API request.
  */
-export type APIFunction<RequestType, EnvironmentType> = {
-  (request: RequestType, env: EnvironmentType): Promise<unknown>;
+export type APIFunction<Request, Response, Environment> = {
+  (request: Request, env: Environment): Promise<Draft<Response>>;
 };
 
 export interface APIEvent {
@@ -42,21 +49,21 @@ export interface APIResult {
  *
  * @see https://ajv.js.org/json-type-definition.html
  */
-export interface APIValidatorData<RequestType, ResponseType, EnvironmentType> {
+export interface APIValidatorData<Request, Response, Environment> {
   /**
    * Schema used to validate the request.
    */
-  requestSchema: JTDSchemaType<RequestType>;
+  requestSchema: JTDSchemaType<Request>;
 
   /**
    * Schema used to validate the response.
    */
-  responseSchema: JTDSchemaType<ResponseType>;
+  responseSchema: JTDSchemaType<Response>;
 
   /**
    * Schema used to validate environment variables.
    */
-  environmentSchema?: JTDSchemaType<EnvironmentType>;
+  environmentSchema?: JTDSchemaType<Environment>;
 }
 
 /**
@@ -80,7 +87,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
    */
   public async validate(
     event: APIEvent,
-    handler: APIFunction<RequestType, EnvironmentType>,
+    handler: APIFunction<RequestType, ResponseType, EnvironmentType>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment?: any
   ): Promise<APIResult> {
@@ -91,11 +98,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       const validateEnvironment = ajv.compile(this.data.environmentSchema);
 
       if (!validateEnvironment(environment)) {
-        return {
-          statusCode: 500,
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(validateEnvironment.errors),
-        };
+        return this.result(500, validateEnvironment.errors);
       }
     }
 
@@ -104,29 +107,34 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
     const validateRequest = ajv.compile(this.data.requestSchema);
 
     if (validateRequest(request)) {
+      let response = {};
+
+      // Handle the API request.
+      try {
+        response = await handler(request, environment ?? {});
+      } catch (error) {
+        return this.result(500, error);
+      }
+
       // Validate response.
-      const response = await handler(request, environment ?? {});
       const validateResponse = ajv.compile(this.data.responseSchema);
 
       if (validateResponse(response)) {
-        return {
-          statusCode: 200,
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(response),
-        };
+        return this.result(200, response);
       } else {
-        return {
-          statusCode: 500,
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(validateResponse.errors),
-        };
+        return this.result(500, validateResponse.errors);
       }
     } else {
-      return {
-        statusCode: 400,
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(validateRequest.errors),
-      };
+      return this.result(400, validateRequest.errors);
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private result(code: number, body: any): APIResult {
+    return {
+      statusCode: code,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    };
   }
 }
