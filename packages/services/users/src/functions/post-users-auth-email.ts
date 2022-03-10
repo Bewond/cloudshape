@@ -42,10 +42,21 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  const result = await validator.validate(event, main, process.env);
+  let result;
+
+  try {
+    result = await validator.validate(event, main, process.env);
+  } catch (e) {
+    console.log("Error: ", JSON.stringify(e, null, 2));
+  }
 
   console.log("result:", JSON.stringify(result, null, 2));
-  return result;
+  return (
+    result ?? {
+      statusCode: 200,
+      body: "null",
+    }
+  );
 };
 
 async function main(request: Request, env: Environment): Promise<unknown> {
