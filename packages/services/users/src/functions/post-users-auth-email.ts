@@ -59,7 +59,13 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  const result = await validator.validate(event, main, process.env);
+  let result = {};
+
+  try {
+    result = await validator.validate(event, main, process.env);
+  } catch (error) {
+    console.log("error:", JSON.stringify(error, null, 2));
+  }
 
   console.log("result:", JSON.stringify(result, null, 2));
   return result;
