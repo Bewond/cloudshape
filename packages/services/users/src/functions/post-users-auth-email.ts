@@ -59,16 +59,23 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  let result = {};
+  console.log("OK");
 
   try {
-    result = await validator.validate(event, main, process.env);
+    console.log("env:", JSON.stringify(process.env, null, 2));
+
+    const result = await validator.validate(event, main, process.env);
+
+    console.log("result:", JSON.stringify(result, null, 2));
+    return result;
   } catch (error) {
     console.log("error:", JSON.stringify(error, null, 2));
+    return {
+      statusCode: 500,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(error),
+    };
   }
-
-  console.log("result:", JSON.stringify(result, null, 2));
-  return result;
 };
 
 async function main(request: Request, env: Environment): Promise<unknown> {
