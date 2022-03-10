@@ -35,6 +35,7 @@ const handler = async (event) => {
 exports.handler = handler;
 async function sendEmail(emailAddress, secretLoginCode) {
     const varname = "$secretCode";
+    console.log(JSON.stringify(process_1.env["messageSubject"]));
     if (process_1.env["emailSource"] && process_1.env["messageSubject"] && process_1.env["messageText"] && process_1.env["messageHtml"])
         await new aws_sdk_1.SES()
             .sendEmail({
@@ -42,7 +43,7 @@ async function sendEmail(emailAddress, secretLoginCode) {
             Destination: { ToAddresses: [emailAddress] },
             Message: {
                 Subject: {
-                    Data: process_1.env["messageSubject"].replaceAll(varname, secretLoginCode),
+                    Data: process_1.env["messageSubject"].toString().replaceAll(varname, secretLoginCode),
                 },
                 Body: {
                     Text: {
