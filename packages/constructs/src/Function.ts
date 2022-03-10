@@ -48,8 +48,6 @@ export class Function extends PermissionsMixin(lambdaNode.NodejsFunction) {
     super(scope, id, {
       ...props,
       entry: props.entry,
-      handler: props.handler ?? "handler",
-      environment: props.environment ?? {},
       tracing: lambda.Tracing.ACTIVE,
       logRetention: logs.RetentionDays.SIX_MONTHS,
     });

@@ -37,8 +37,6 @@ class Function extends (0, Permissions_1.PermissionsMixin)(lambdaNode.NodejsFunc
         super(scope, id, {
             ...props,
             entry: props.entry,
-            handler: props.handler ?? "handler",
-            environment: props.environment ?? {},
             tracing: lambda.Tracing.ACTIVE,
             logRetention: logs.RetentionDays.SIX_MONTHS,
         });

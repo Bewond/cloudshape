@@ -40,6 +40,8 @@ export const handler: CreateAuthChallengeTriggerHandler = async (event) => {
 async function sendEmail(emailAddress: string, secretLoginCode: string) {
   const varname = "$secretCode";
 
+  console.log(JSON.stringify(env["messageSubject"]));
+
   if (env["emailSource"] && env["messageSubject"] && env["messageText"] && env["messageHtml"])
     await new SES()
       .sendEmail({
@@ -47,7 +49,7 @@ async function sendEmail(emailAddress: string, secretLoginCode: string) {
         Destination: { ToAddresses: [emailAddress] },
         Message: {
           Subject: {
-            Data: env["messageSubject"].replaceAll(varname, secretLoginCode),
+            Data: env["messageSubject"].toString().replaceAll(varname, secretLoginCode),
           },
           Body: {
             Text: {
