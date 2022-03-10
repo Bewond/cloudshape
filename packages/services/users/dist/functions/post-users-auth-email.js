@@ -26,9 +26,18 @@ const handler = async (event) => {
             },
         },
     });
-    const result = await validator.validate(event, main, process.env);
+    let result;
+    try {
+        result = await validator.validate(event, main, process.env);
+    }
+    catch (e) {
+        console.log("Error: ", JSON.stringify(e, null, 2));
+    }
     console.log("result:", JSON.stringify(result, null, 2));
-    return result;
+    return (result ?? {
+        statusCode: 200,
+        body: "null",
+    });
 };
 exports.handler = handler;
 async function main(request, env) {
