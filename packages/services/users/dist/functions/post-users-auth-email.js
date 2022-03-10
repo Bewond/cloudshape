@@ -31,7 +31,10 @@ class APIValidator {
         console.log("OK1");
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
+            console.log("environment:", JSON.stringify(environment, null, 2));
+            console.log("this.data.environmentSchema:", JSON.stringify(this.data.environmentSchema, null, 2));
             const validateEnvironment = ajv.compile(this.data.environmentSchema);
+            console.log("OK1.5");
             if (!validateEnvironment(environment)) {
                 console.log("validateEnvironment.errors:", JSON.stringify(validateEnvironment.errors, null, 2));
                 return this.result(500, validateEnvironment.errors);
