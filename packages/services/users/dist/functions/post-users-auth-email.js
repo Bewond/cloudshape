@@ -13,6 +13,7 @@ const jtd_1 = __importDefault(require("ajv/dist/jtd"));
  */
 class APIValidator {
     constructor(data) {
+        this.ajv = new jtd_1.default();
         this.data = data;
     }
     /**
@@ -27,15 +28,20 @@ class APIValidator {
     async validate(event, handler, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment) {
-        const ajv = new jtd_1.default();
         console.log("OK1");
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
             console.log("environment:", JSON.stringify(environment, null, 2));
             console.log("this.data.environmentSchema:", JSON.stringify(this.data.environmentSchema, null, 2));
-            const validateEnvironment = ajv.compile(this.data.environmentSchema);
+            let validateEnvironment;
+            try {
+                validateEnvironment = this.ajv.compile(this.data.environmentSchema);
+            }
+            catch (e) {
+                console.log("e:", JSON.stringify(e, null, 2));
+            }
             console.log("OK1.5");
-            if (!validateEnvironment(environment)) {
+            if (validateEnvironment && !validateEnvironment(environment)) {
                 console.log("validateEnvironment.errors:", JSON.stringify(validateEnvironment.errors, null, 2));
                 return this.result(500, validateEnvironment.errors);
             }
@@ -43,7 +49,7 @@ class APIValidator {
         console.log("OK2");
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
-        const validateRequest = ajv.compile(this.data.requestSchema);
+        const validateRequest = this.ajv.compile(this.data.requestSchema);
         if (validateRequest(request)) {
             let response = {};
             console.log("OK3");
@@ -56,7 +62,7 @@ class APIValidator {
             }
             console.log("OK4");
             // Validate response.
-            const validateResponse = ajv.compile(this.data.responseSchema);
+            const validateResponse = this.ajv.compile(this.data.responseSchema);
             if (validateResponse(response)) {
                 console.log("OK5");
                 return this.result(200, response);

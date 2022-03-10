@@ -78,6 +78,7 @@ export interface APIValidatorData<Request, Response, Environment> {
  */
 export class APIValidator<RequestType, ResponseType, EnvironmentType> {
   private readonly data: APIValidatorData<RequestType, ResponseType, EnvironmentType>;
+  private readonly ajv = new Ajv();
 
   constructor(data: APIValidatorData<RequestType, ResponseType, EnvironmentType>) {
     this.data = data;
@@ -98,8 +99,6 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment?: any
   ): Promise<APIResult> {
-    const ajv = new Ajv();
-
     console.log("OK1");
 
     // Validate environment variables.
@@ -110,11 +109,17 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
         JSON.stringify(this.data.environmentSchema, null, 2)
       );
 
-      const validateEnvironment = ajv.compile(this.data.environmentSchema);
+      let validateEnvironment;
+
+      try {
+        validateEnvironment = this.ajv.compile(this.data.environmentSchema);
+      } catch (e) {
+        console.log("e:", JSON.stringify(e, null, 2));
+      }
 
       console.log("OK1.5");
 
-      if (!validateEnvironment(environment)) {
+      if (validateEnvironment && !validateEnvironment(environment)) {
         console.log(
           "validateEnvironment.errors:",
           JSON.stringify(validateEnvironment.errors, null, 2)
@@ -127,7 +132,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
 
     // Validate request.
     const request = JSON.parse(event.body ?? "{}");
-    const validateRequest = ajv.compile(this.data.requestSchema);
+    const validateRequest = this.ajv.compile(this.data.requestSchema);
 
     if (validateRequest(request)) {
       let response = {};
@@ -144,7 +149,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       console.log("OK4");
 
       // Validate response.
-      const validateResponse = ajv.compile(this.data.responseSchema);
+      const validateResponse = this.ajv.compile(this.data.responseSchema);
 
       if (validateResponse(response)) {
         console.log("OK5");

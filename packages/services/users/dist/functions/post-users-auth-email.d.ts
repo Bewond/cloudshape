@@ -62,6 +62,7 @@ export interface APIValidatorData<Request, Response, Environment> {
  */
 export declare class APIValidator<RequestType, ResponseType, EnvironmentType> {
     private readonly data;
+    private readonly ajv;
     constructor(data: APIValidatorData<RequestType, ResponseType, EnvironmentType>);
     /**
      * Performs the handler function and the validation of the request, of the response
