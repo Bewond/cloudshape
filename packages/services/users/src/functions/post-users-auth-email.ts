@@ -107,6 +107,7 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       const validateEnvironment = ajv.compile(this.data.environmentSchema);
 
       if (!validateEnvironment(environment)) {
+        console.log("validateEnvironment.errors:", JSON.stringify(validateEnvironment.errors, null, 2));
         return this.result(500, validateEnvironment.errors);
       }
     }
