@@ -31,20 +31,23 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
         session: { type: "string" },
         secretCode: { type: "string" },
       },
+      required: ["userId", "session", "secretCode"],
     },
     responseSchema: {
       properties: {
         accessToken: { type: "string" },
         tokenType: { type: "string" },
-        expiresIn: { type: "uint16" },
+        expiresIn: { type: "integer" },
         idToken: { type: "string" },
         refreshToken: { type: "string" },
+        required: ["accessToken", "tokenType", "expiresIn", "idToken", "refreshToken"],
       },
     },
     environmentSchema: {
       properties: {
         userPoolId: { type: "string" },
         userPoolClientId: { type: "string" },
+        required: ["userPoolId", "userPoolClientId"],
       },
     },
   });

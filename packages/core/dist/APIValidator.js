@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.APIValidator = void 0;
-const jtd_1 = __importDefault(require("ajv/dist/jtd"));
+const json_schema_1 = require("@cfworker/json-schema");
 /**
  * @summary Validator of an API handler.
  */
@@ -24,18 +21,17 @@ class APIValidator {
     async validate(event, handler, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment) {
-        const ajv = new jtd_1.default();
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
-            const validateEnvironment = ajv.compile(this.data.environmentSchema);
-            if (!validateEnvironment(environment)) {
+            const validateEnvironment = new json_schema_1.Validator(this.data.environmentSchema).validate(environment);
+            if (!validateEnvironment.valid) {
                 return this.result(500, validateEnvironment.errors);
             }
         }
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
-        const validateRequest = ajv.compile(this.data.requestSchema);
-        if (validateRequest(request)) {
+        const validateRequest = new json_schema_1.Validator(this.data.requestSchema).validate(request);
+        if (validateRequest.valid) {
             let response = {};
             // Handle the API request.
             try {
@@ -45,8 +41,8 @@ class APIValidator {
                 return this.result(500, error);
             }
             // Validate response.
-            const validateResponse = ajv.compile(this.data.responseSchema);
-            if (validateResponse(response)) {
+            const validateResponse = new json_schema_1.Validator(this.data.responseSchema).validate(response);
+            if (validateResponse.valid) {
                 return this.result(200, response);
             }
             else {

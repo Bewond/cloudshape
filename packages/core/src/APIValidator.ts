@@ -1,4 +1,4 @@
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
+import { Schema, Validator } from "@cfworker/json-schema";
 
 /**
  * Constructs a type with all properties of T set to optional or undefined.
@@ -47,32 +47,32 @@ export interface APIResult {
 /**
  * @summary Data to initialize APIValidator.
  *
- * @see https://ajv.js.org/json-type-definition.html
+ * @see https://json-schema.org/
  */
-export interface APIValidatorData<Request, Response, Environment> {
+export interface APIValidatorData {
   /**
    * Schema used to validate the request.
    */
-  requestSchema: JTDSchemaType<Request>;
+  requestSchema: Schema;
 
   /**
    * Schema used to validate the response.
    */
-  responseSchema: JTDSchemaType<Response>;
+  responseSchema: Schema;
 
   /**
    * Schema used to validate environment variables.
    */
-  environmentSchema?: JTDSchemaType<Environment>;
+  environmentSchema?: Schema;
 }
 
 /**
  * @summary Validator of an API handler.
  */
 export class APIValidator<RequestType, ResponseType, EnvironmentType> {
-  private readonly data: APIValidatorData<RequestType, ResponseType, EnvironmentType>;
+  private readonly data: APIValidatorData;
 
-  constructor(data: APIValidatorData<RequestType, ResponseType, EnvironmentType>) {
+  constructor(data: APIValidatorData) {
     this.data = data;
   }
 
@@ -91,22 +91,20 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment?: any
   ): Promise<APIResult> {
-    const ajv = new Ajv();
-
     // Validate environment variables.
     if (environment && this.data.environmentSchema) {
-      const validateEnvironment = ajv.compile(this.data.environmentSchema);
+      const validateEnvironment = new Validator(this.data.environmentSchema).validate(environment);
 
-      if (!validateEnvironment(environment)) {
+      if (!validateEnvironment.valid) {
         return this.result(500, validateEnvironment.errors);
       }
     }
 
     // Validate request.
     const request = JSON.parse(event.body ?? "{}");
-    const validateRequest = ajv.compile(this.data.requestSchema);
+    const validateRequest = new Validator(this.data.requestSchema).validate(request);
 
-    if (validateRequest(request)) {
+    if (validateRequest.valid) {
       let response = {};
 
       // Handle the API request.
@@ -117,9 +115,9 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       }
 
       // Validate response.
-      const validateResponse = ajv.compile(this.data.responseSchema);
+      const validateResponse = new Validator(this.data.responseSchema).validate(response);
 
-      if (validateResponse(response)) {
+      if (validateResponse.valid) {
         return this.result(200, response);
       } else {
         return this.result(500, validateResponse.errors);
