@@ -12,23 +12,20 @@ const handler = async (event) => {
                 session: { type: "string" },
                 secretCode: { type: "string" },
             },
-            required: ["userId", "session", "secretCode"],
         },
         responseSchema: {
             properties: {
                 accessToken: { type: "string" },
                 tokenType: { type: "string" },
-                expiresIn: { type: "integer" },
+                expiresIn: { type: "number" },
                 idToken: { type: "string" },
                 refreshToken: { type: "string" },
-                required: ["accessToken", "tokenType", "expiresIn", "idToken", "refreshToken"],
             },
         },
         environmentSchema: {
             properties: {
                 userPoolId: { type: "string" },
                 userPoolClientId: { type: "string" },
-                required: ["userPoolId", "userPoolClientId"],
             },
         },
     });

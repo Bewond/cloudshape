@@ -11,7 +11,6 @@ const handler = async (event) => {
             properties: {
                 email: { type: "string" },
             },
-            required: ["email"],
         },
         responseSchema: {
             properties: {
@@ -19,14 +18,12 @@ const handler = async (event) => {
                 email: { type: "string" },
                 session: { type: "string" },
             },
-            required: ["userId", "email", "session"],
         },
         environmentSchema: {
             properties: {
                 userPoolId: { type: "string" },
                 userPoolClientId: { type: "string" },
             },
-            required: ["userPoolId", "userPoolClientId"],
         },
     });
     const result = await validator.validate(event, main, process.env);

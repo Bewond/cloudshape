@@ -1,4 +1,4 @@
-import { Schema, Validator } from "@cfworker/json-schema";
+import { Schema, Validator } from "./Validator";
 
 /**
  * Constructs a type with all properties of T set to optional or undefined.
@@ -46,8 +46,6 @@ export interface APIResult {
 
 /**
  * @summary Data to initialize APIValidator.
- *
- * @see https://json-schema.org/
  */
 export interface APIValidatorData {
   /**
@@ -93,18 +91,18 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
   ): Promise<APIResult> {
     // Validate environment variables.
     if (environment && this.data.environmentSchema) {
-      const validateEnvironment = new Validator(this.data.environmentSchema).validate(environment);
+      const testEnvironment = new Validator(this.data.environmentSchema).test(environment);
 
-      if (!validateEnvironment.valid) {
-        return this.result(500, validateEnvironment.errors);
+      if (!testEnvironment.valid) {
+        return this.result(500, testEnvironment.errors);
       }
     }
 
     // Validate request.
     const request = JSON.parse(event.body ?? "{}");
-    const validateRequest = new Validator(this.data.requestSchema).validate(request);
+    const testRequest = new Validator(this.data.requestSchema).test(request);
 
-    if (validateRequest.valid) {
+    if (testRequest.valid) {
       let response = {};
 
       // Handle the API request.
@@ -115,15 +113,15 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
       }
 
       // Validate response.
-      const validateResponse = new Validator(this.data.responseSchema).validate(response);
+      const testResponse = new Validator(this.data.responseSchema).test(response);
 
-      if (validateResponse.valid) {
+      if (testResponse.valid) {
         return this.result(200, response);
       } else {
-        return this.result(500, validateResponse.errors);
+        return this.result(500, testResponse.errors);
       }
     } else {
-      return this.result(400, validateRequest.errors);
+      return this.result(400, testRequest.errors);
     }
   }
 

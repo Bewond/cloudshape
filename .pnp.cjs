@@ -922,15 +922,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@cfworker/json-schema", [\
-        ["npm:1.12.2", {\
-          "packageLocation": "./.yarn/cache/@cfworker-json-schema-npm-1.12.2-7b2f7b6610-f76f1d80c3.zip/node_modules/@cfworker/json-schema/",\
-          "packageDependencies": [\
-            ["@cfworker/json-schema", "npm:1.12.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@cloudshape-services/chat", [\
         ["workspace:packages/services/chat", {\
           "packageLocation": "./packages/services/chat/",\
@@ -1007,7 +998,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/core/",\
           "packageDependencies": [\
             ["@cloudshape/core", "workspace:packages/core"],\
-            ["@cfworker/json-schema", "npm:1.12.2"],\
             ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\

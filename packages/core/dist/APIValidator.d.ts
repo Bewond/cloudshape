@@ -1,4 +1,4 @@
-import { Schema } from "@cfworker/json-schema";
+import { Schema } from "./Validator";
 /**
  * Constructs a type with all properties of T set to optional or undefined.
  */
@@ -39,8 +39,6 @@ export interface APIResult {
 }
 /**
  * @summary Data to initialize APIValidator.
- *
- * @see https://json-schema.org/
  */
 export interface APIValidatorData {
     /**

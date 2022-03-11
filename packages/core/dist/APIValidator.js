@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.APIValidator = void 0;
-const json_schema_1 = require("@cfworker/json-schema");
+const Validator_1 = require("./Validator");
 /**
  * @summary Validator of an API handler.
  */
@@ -23,15 +23,15 @@ class APIValidator {
     environment) {
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
-            const validateEnvironment = new json_schema_1.Validator(this.data.environmentSchema).validate(environment);
-            if (!validateEnvironment.valid) {
-                return this.result(500, validateEnvironment.errors);
+            const testEnvironment = new Validator_1.Validator(this.data.environmentSchema).test(environment);
+            if (!testEnvironment.valid) {
+                return this.result(500, testEnvironment.errors);
             }
         }
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
-        const validateRequest = new json_schema_1.Validator(this.data.requestSchema).validate(request);
-        if (validateRequest.valid) {
+        const testRequest = new Validator_1.Validator(this.data.requestSchema).test(request);
+        if (testRequest.valid) {
             let response = {};
             // Handle the API request.
             try {
@@ -41,16 +41,16 @@ class APIValidator {
                 return this.result(500, error);
             }
             // Validate response.
-            const validateResponse = new json_schema_1.Validator(this.data.responseSchema).validate(response);
-            if (validateResponse.valid) {
+            const testResponse = new Validator_1.Validator(this.data.responseSchema).test(response);
+            if (testResponse.valid) {
                 return this.result(200, response);
             }
             else {
-                return this.result(500, validateResponse.errors);
+                return this.result(500, testResponse.errors);
             }
         }
         else {
-            return this.result(400, validateRequest.errors);
+            return this.result(400, testRequest.errors);
         }
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

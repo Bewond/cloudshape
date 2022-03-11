@@ -26,7 +26,6 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
       properties: {
         email: { type: "string" },
       },
-      required: ["email"],
     },
     responseSchema: {
       properties: {
@@ -34,14 +33,12 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
         email: { type: "string" },
         session: { type: "string" },
       },
-      required: ["userId", "email", "session"],
     },
     environmentSchema: {
       properties: {
         userPoolId: { type: "string" },
         userPoolClientId: { type: "string" },
       },
-      required: ["userPoolId", "userPoolClientId"],
     },
   });
 
