@@ -1,5 +1,5 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
-import { JTDSchemaType } from "ajv/dist/jtd";
+import { Schema } from "@cfworker/json-schema";
 /**
  * Constructs a type with all properties of T set to optional or undefined.
  */
@@ -41,29 +41,28 @@ export interface APIResult {
 /**
  * @summary Data to initialize APIValidator.
  *
- * @see https://ajv.js.org/json-type-definition.html
+ * @see TODO
  */
-export interface APIValidatorData<Request, Response, Environment> {
+export interface APIValidatorData {
     /**
      * Schema used to validate the request.
      */
-    requestSchema: JTDSchemaType<Request>;
+    requestSchema: Schema;
     /**
      * Schema used to validate the response.
      */
-    responseSchema: JTDSchemaType<Response>;
+    responseSchema: Schema;
     /**
      * Schema used to validate environment variables.
      */
-    environmentSchema?: JTDSchemaType<Environment>;
+    environmentSchema?: Schema;
 }
 /**
  * @summary Validator of an API handler.
  */
 export declare class APIValidator<RequestType, ResponseType, EnvironmentType> {
     private readonly data;
-    private readonly ajv;
-    constructor(data: APIValidatorData<RequestType, ResponseType, EnvironmentType>);
+    constructor(data: APIValidatorData);
     /**
      * Performs the handler function and the validation of the request, of the response
      * and optionally of the environment variables based on the provided schemas.

@@ -5,7 +5,7 @@ import { randomBytes } from "crypto";
 
 //
 
-import Ajv, { JTDSchemaType } from "ajv/dist/jtd";
+import { Validator, Schema } from "@cfworker/json-schema";
 
 /**
  * Constructs a type with all properties of T set to optional or undefined.
@@ -54,33 +54,32 @@ export interface APIResult {
 /**
  * @summary Data to initialize APIValidator.
  *
- * @see https://ajv.js.org/json-type-definition.html
+ * @see TODO
  */
-export interface APIValidatorData<Request, Response, Environment> {
+export interface APIValidatorData {
   /**
    * Schema used to validate the request.
    */
-  requestSchema: JTDSchemaType<Request>;
+  requestSchema: Schema;
 
   /**
    * Schema used to validate the response.
    */
-  responseSchema: JTDSchemaType<Response>;
+  responseSchema: Schema;
 
   /**
    * Schema used to validate environment variables.
    */
-  environmentSchema?: JTDSchemaType<Environment>;
+  environmentSchema?: Schema;
 }
 
 /**
  * @summary Validator of an API handler.
  */
 export class APIValidator<RequestType, ResponseType, EnvironmentType> {
-  private readonly data: APIValidatorData<RequestType, ResponseType, EnvironmentType>;
-  private readonly ajv = new Ajv();
+  private readonly data: APIValidatorData;
 
-  constructor(data: APIValidatorData<RequestType, ResponseType, EnvironmentType>) {
+  constructor(data: APIValidatorData) {
     this.data = data;
   }
 
@@ -99,45 +98,21 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment?: any
   ): Promise<APIResult> {
-    console.log("OK1");
-
     // Validate environment variables.
     if (environment && this.data.environmentSchema) {
-      console.log("environment:", JSON.stringify(environment, null, 2));
-      console.log(
-        "this.data.environmentSchema:",
-        JSON.stringify(this.data.environmentSchema, null, 2)
-      );
+      const validateEnvironment = new Validator(this.data.environmentSchema).validate(environment);
 
-      let validateEnvironment;
-
-      try {
-        validateEnvironment = this.ajv.compile(this.data.environmentSchema);
-      } catch (e) {
-        console.log("e:", JSON.stringify(e, null, 2));
-      }
-
-      console.log("OK1.5");
-
-      if (validateEnvironment && !validateEnvironment(environment)) {
-        console.log(
-          "validateEnvironment.errors:",
-          JSON.stringify(validateEnvironment.errors, null, 2)
-        );
+      if (!validateEnvironment.valid) {
         return this.result(500, validateEnvironment.errors);
       }
     }
 
-    console.log("OK2");
-
     // Validate request.
     const request = JSON.parse(event.body ?? "{}");
-    const validateRequest = this.ajv.compile(this.data.requestSchema);
+    const validateRequest = new Validator(this.data.requestSchema).validate(request);
 
-    if (validateRequest(request)) {
+    if (validateRequest.valid) {
       let response = {};
-
-      console.log("OK3");
 
       // Handle the API request.
       try {
@@ -146,13 +121,10 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
         return this.result(500, error);
       }
 
-      console.log("OK4");
-
       // Validate response.
-      const validateResponse = this.ajv.compile(this.data.responseSchema);
+      const validateResponse = new Validator(this.data.responseSchema).validate(response);
 
-      if (validateResponse(response)) {
-        console.log("OK5");
+      if (validateResponse.valid) {
         return this.result(200, response);
       } else {
         return this.result(500, validateResponse.errors);
@@ -164,7 +136,6 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private result(code: number, body: any): APIResult {
-    console.log("WOW");
     return {
       statusCode: code,
       headers: { "content-type": "application/json" },

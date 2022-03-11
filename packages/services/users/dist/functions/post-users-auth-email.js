@@ -1,19 +1,15 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = exports.APIValidator = void 0;
 const aws_sdk_1 = require("aws-sdk");
 const crypto_1 = require("crypto");
 //
-const jtd_1 = __importDefault(require("ajv/dist/jtd"));
+const json_schema_1 = require("@cfworker/json-schema");
 /**
  * @summary Validator of an API handler.
  */
 class APIValidator {
     constructor(data) {
-        this.ajv = new jtd_1.default();
         this.data = data;
     }
     /**
@@ -28,31 +24,18 @@ class APIValidator {
     async validate(event, handler, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment) {
-        console.log("OK1");
         // Validate environment variables.
         if (environment && this.data.environmentSchema) {
-            console.log("environment:", JSON.stringify(environment, null, 2));
-            console.log("this.data.environmentSchema:", JSON.stringify(this.data.environmentSchema, null, 2));
-            let validateEnvironment;
-            try {
-                validateEnvironment = this.ajv.compile(this.data.environmentSchema);
-            }
-            catch (e) {
-                console.log("e:", JSON.stringify(e, null, 2));
-            }
-            console.log("OK1.5");
-            if (validateEnvironment && !validateEnvironment(environment)) {
-                console.log("validateEnvironment.errors:", JSON.stringify(validateEnvironment.errors, null, 2));
+            const validateEnvironment = new json_schema_1.Validator(this.data.environmentSchema).validate(environment);
+            if (!validateEnvironment.valid) {
                 return this.result(500, validateEnvironment.errors);
             }
         }
-        console.log("OK2");
         // Validate request.
         const request = JSON.parse(event.body ?? "{}");
-        const validateRequest = this.ajv.compile(this.data.requestSchema);
-        if (validateRequest(request)) {
+        const validateRequest = new json_schema_1.Validator(this.data.requestSchema).validate(request);
+        if (validateRequest.valid) {
             let response = {};
-            console.log("OK3");
             // Handle the API request.
             try {
                 response = await handler(request, environment ?? {});
@@ -60,11 +43,9 @@ class APIValidator {
             catch (error) {
                 return this.result(500, error);
             }
-            console.log("OK4");
             // Validate response.
-            const validateResponse = this.ajv.compile(this.data.responseSchema);
-            if (validateResponse(response)) {
-                console.log("OK5");
+            const validateResponse = new json_schema_1.Validator(this.data.responseSchema).validate(response);
+            if (validateResponse.valid) {
                 return this.result(200, response);
             }
             else {
@@ -77,7 +58,6 @@ class APIValidator {
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     result(code, body) {
-        console.log("WOW");
         return {
             statusCode: code,
             headers: { "content-type": "application/json" },

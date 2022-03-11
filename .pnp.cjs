@@ -922,6 +922,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@cfworker/json-schema", [\
+        ["npm:1.12.2", {\
+          "packageLocation": "./.yarn/cache/@cfworker-json-schema-npm-1.12.2-7b2f7b6610-f76f1d80c3.zip/node_modules/@cfworker/json-schema/",\
+          "packageDependencies": [\
+            ["@cfworker/json-schema", "npm:1.12.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@cloudshape-services/chat", [\
         ["workspace:packages/services/chat", {\
           "packageLocation": "./packages/services/chat/",\
@@ -936,12 +945,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/services/users/",\
           "packageDependencies": [\
             ["@cloudshape-services/users", "workspace:packages/services/users"],\
+            ["@cfworker/json-schema", "npm:1.12.2"],\
             ["@cloudshape/constructs", "virtual:9a3458288b46a14828fdba7b9b38fbde8f29502af28c00af1f4ce9c5ebbb235985fa5e84376fe3b884ba8ac09bc6b9b7af58f5788fa00e1bcf4aa61a22d9bc93#workspace:packages/constructs"],\
             ["@cloudshape/core", "workspace:packages/core"],\
             ["@tsconfig/node16-strictest", "npm:1.0.0"],\
             ["@types/aws-lambda", "npm:8.10.93"],\
             ["@types/node", "npm:17.0.21"],\
-            ["ajv", "npm:8.10.0"],\
             ["aws-cdk-lib", "virtual:14fd4ab6819d12846a5c09030a075b0f59bac87f4910471ec65c41c1809d1c94369ada5e8741811fdc57a7acbc908f8ef455fea356a95d4557d2193ba775e4c9#npm:2.15.0"],\
             ["aws-sdk", "npm:2.1088.0"],\
             ["constructs", "npm:10.0.81"],\
