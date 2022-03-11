@@ -11,7 +11,7 @@ export interface ValidationError {
     /**
      * Error message.
      */
-    error: string;
+    message: string;
 }
 export interface ValidationResult {
     /**

@@ -45,9 +45,9 @@ export interface APIResult {
 }
 
 /**
- * @summary Data to initialize APIValidator.
+ * @summary Data to initialize Flow.
  */
-export interface APIValidatorData {
+export interface FlowData {
   /**
    * Schema used to validate the request.
    */
@@ -65,12 +65,12 @@ export interface APIValidatorData {
 }
 
 /**
- * @summary Validator of an API handler.
+ * @summary Support class for API flow management.
  */
-export class APIValidator<RequestType, ResponseType, EnvironmentType> {
-  private readonly data: APIValidatorData;
+export class Flow<RequestType, ResponseType, EnvironmentType> {
+  private readonly data: FlowData;
 
-  constructor(data: APIValidatorData) {
+  constructor(data: FlowData) {
     this.data = data;
   }
 
@@ -79,11 +79,11 @@ export class APIValidator<RequestType, ResponseType, EnvironmentType> {
    * and optionally of the environment variables based on the provided schemas.
    *
    * @param event - API request event.
-   * @param handler - function that processes the validated request.
+   * @param handler - handler function.
    * @param environment - environment variables.
-   * @returns the result of the handler's execution.
+   * @returns API handler result.
    */
-  public async validate(
+  public async start(
     event: APIEvent,
     handler: APIFunction<RequestType, ResponseType, EnvironmentType>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

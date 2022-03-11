@@ -38,9 +38,9 @@ export interface APIResult {
     body?: string;
 }
 /**
- * @summary Data to initialize APIValidator.
+ * @summary Data to initialize Flow.
  */
-export interface APIValidatorData {
+export interface FlowData {
     /**
      * Schema used to validate the request.
      */
@@ -55,21 +55,21 @@ export interface APIValidatorData {
     environmentSchema?: Schema;
 }
 /**
- * @summary Validator of an API handler.
+ * @summary Support class for API flow management.
  */
-export declare class APIValidator<RequestType, ResponseType, EnvironmentType> {
+export declare class Flow<RequestType, ResponseType, EnvironmentType> {
     private readonly data;
-    constructor(data: APIValidatorData);
+    constructor(data: FlowData);
     /**
      * Performs the handler function and the validation of the request, of the response
      * and optionally of the environment variables based on the provided schemas.
      *
      * @param event - API request event.
-     * @param handler - function that processes the validated request.
+     * @param handler - handler function.
      * @param environment - environment variables.
-     * @returns the result of the handler's execution.
+     * @returns API handler result.
      */
-    validate(event: APIEvent, handler: APIFunction<RequestType, ResponseType, EnvironmentType>, environment?: any): Promise<APIResult>;
+    start(event: APIEvent, handler: APIFunction<RequestType, ResponseType, EnvironmentType>, environment?: any): Promise<APIResult>;
     private result;
 }
-//# sourceMappingURL=APIValidator.d.ts.map
+//# sourceMappingURL=Flow.d.ts.map

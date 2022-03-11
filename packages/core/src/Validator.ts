@@ -14,7 +14,7 @@ export interface ValidationError {
   /**
    * Error message.
    */
-  error: string;
+  message: string;
 }
 
 export interface ValidationResult {
@@ -66,35 +66,35 @@ export class Validator {
       errors.push({
         keyword: "type",
         location: `${location}/type`,
-        error: `Instance type "${instanceType}" is invalid. Expected "${$type}".`,
+        message: `Instance type "${instanceType}" is invalid. Expected "${$type}".`,
       });
     }
 
     // properties
     if ($properties) {
       for (const key in $properties) {
-        if (!(key in instance)) {
+        if (key in instance) {
+          const result = this.validate(
+            instance[key],
+            $properties[key] ?? {},
+            `${location}/properties`
+          );
+          if (!result.valid) {
+            errors.push(
+              {
+                keyword: "properties",
+                location: `${location}/properties`,
+                message: `Property "${key}" does not match schema.`,
+              },
+              ...result.errors
+            );
+          }
+        } else {
           errors.push({
             keyword: "properties",
             location: `${location}/properties`,
-            error: `Instance does not have required property "${key}".`,
+            message: `Instance does not have required property "${key}".`,
           });
-        }
-
-        const result = this.validate(
-          instance[key],
-          $properties[key] ?? {},
-          `${location}/properties`
-        );
-        if (!result.valid) {
-          errors.push(
-            {
-              keyword: "properties",
-              location: `${location}/properties`,
-              error: `Property "${key}" does not match schema.`,
-            },
-            ...result.errors
-          );
         }
       }
     }

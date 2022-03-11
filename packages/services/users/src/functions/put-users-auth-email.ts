@@ -1,4 +1,4 @@
-import { APIValidator, Draft } from "@cloudshape/core";
+import { Draft, Flow } from "@cloudshape/core";
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda";
 import { CognitoIdentityServiceProvider } from "aws-sdk";
 
@@ -24,7 +24,7 @@ interface Environment {
 export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
   console.log("event:", JSON.stringify(event, null, 2));
 
-  const validator = new APIValidator<Request, Response, Environment>({
+  const flow = new Flow<Request, Response, Environment>({
     requestSchema: {
       properties: {
         userId: { type: "string" },
@@ -49,7 +49,7 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
     },
   });
 
-  const result = await validator.validate(event, main, process.env);
+  const result = await flow.start(event, main, process.env);
 
   console.log("result:", JSON.stringify(result, null, 2));
   return result;

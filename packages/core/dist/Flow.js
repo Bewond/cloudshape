@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.APIValidator = void 0;
+exports.Flow = void 0;
 const Validator_1 = require("./Validator");
 /**
- * @summary Validator of an API handler.
+ * @summary Support class for API flow management.
  */
-class APIValidator {
+class Flow {
     constructor(data) {
         this.data = data;
     }
@@ -14,11 +14,11 @@ class APIValidator {
      * and optionally of the environment variables based on the provided schemas.
      *
      * @param event - API request event.
-     * @param handler - function that processes the validated request.
+     * @param handler - handler function.
      * @param environment - environment variables.
-     * @returns the result of the handler's execution.
+     * @returns API handler result.
      */
-    async validate(event, handler, 
+    async start(event, handler, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     environment) {
         // Validate environment variables.
@@ -62,5 +62,5 @@ class APIValidator {
         };
     }
 }
-exports.APIValidator = APIValidator;
-//# sourceMappingURL=APIValidator.js.map
+exports.Flow = Flow;
+//# sourceMappingURL=Flow.js.map

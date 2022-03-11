@@ -5,7 +5,7 @@ const core_1 = require("@cloudshape/core");
 const aws_sdk_1 = require("aws-sdk");
 const handler = async (event) => {
     console.log("event:", JSON.stringify(event, null, 2));
-    const validator = new core_1.APIValidator({
+    const flow = new core_1.Flow({
         requestSchema: {
             properties: {
                 userId: { type: "string" },
@@ -29,7 +29,7 @@ const handler = async (event) => {
             },
         },
     });
-    const result = await validator.validate(event, main, process.env);
+    const result = await flow.start(event, main, process.env);
     console.log("result:", JSON.stringify(result, null, 2));
     return result;
 };
