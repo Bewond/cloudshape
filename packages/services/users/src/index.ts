@@ -1,4 +1,12 @@
-import { API, Auth, Function, HttpMethod, Output, UserPoolClient } from "@cloudshape/constructs";
+import {
+  API,
+  Auth,
+  CustomDomain,
+  Function,
+  HttpMethod,
+  Output,
+  UserPoolClient,
+} from "@cloudshape/constructs";
 import { Construct } from "constructs";
 import * as path from "path";
 
@@ -33,6 +41,13 @@ export interface UsersServiceProps {
    * @default "<html><body><p>Your secret login code:</p><h3>$secretCode</h3></body></html>"
    */
   readonly messageHtml?: string;
+
+  /**
+   * Configure a custom domain.
+   *
+   * @default - no domain mapping configured
+   */
+  readonly customDomain?: CustomDomain;
 }
 
 /**
@@ -56,6 +71,13 @@ export class UsersService extends Construct {
 
     const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
 
+    if (props.customDomain) {
+      authAPI.customDomain({
+        ...props.customDomain,
+        path: props.customDomain.path ?? "users",
+      });
+    }
+
     new Output(this, "apiEndpoint", {
       value: authAPI.apiEndpoint,
       description: "Auth Service apiEndpoint",
@@ -76,7 +98,7 @@ export class UsersService extends Construct {
 
     // User authentication based on email address.
     authAPI.addRoute({
-      path: "/users/auth/email",
+      path: "/auth/email",
       method: HttpMethod.POST,
       handler: new Function(this, "postUsersAuthEmail", {
         entry: path.join(__dirname, `/functions/post-users-auth-email.js`),
@@ -90,7 +112,7 @@ export class UsersService extends Construct {
 
     // Complete user authentication via secret code.
     authAPI.addRoute({
-      path: "/users/auth/email",
+      path: "/auth/email",
       method: HttpMethod.PUT,
       handler: new Function(this, "putUsersAuthEmail", {
         entry: path.join(__dirname, `/functions/put-users-auth-email.js`),

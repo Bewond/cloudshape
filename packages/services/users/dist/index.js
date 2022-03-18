@@ -44,6 +44,12 @@ class UsersService extends constructs_2.Construct {
             authFlows: { custom: true },
         });
         const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
+        if (props.customDomain) {
+            authAPI.customDomain({
+                ...props.customDomain,
+                path: props.customDomain.path ?? "users",
+            });
+        }
         new constructs_1.Output(this, "apiEndpoint", {
             value: authAPI.apiEndpoint,
             description: "Auth Service apiEndpoint",
@@ -60,7 +66,7 @@ class UsersService extends constructs_2.Construct {
         };
         // User authentication based on email address.
         authAPI.addRoute({
-            path: "/users/auth/email",
+            path: "/auth/email",
             method: constructs_1.HttpMethod.POST,
             handler: new constructs_1.Function(this, "postUsersAuthEmail", {
                 entry: path.join(__dirname, `/functions/post-users-auth-email.js`),
@@ -73,7 +79,7 @@ class UsersService extends constructs_2.Construct {
         });
         // Complete user authentication via secret code.
         authAPI.addRoute({
-            path: "/users/auth/email",
+            path: "/auth/email",
             method: constructs_1.HttpMethod.PUT,
             handler: new constructs_1.Function(this, "putUsersAuthEmail", {
                 entry: path.join(__dirname, `/functions/put-users-auth-email.js`),

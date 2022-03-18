@@ -1,3 +1,4 @@
+import { CustomDomain } from "@cloudshape/constructs";
 import { Construct } from "constructs";
 /**
  * The properties for the UsersService class.
@@ -27,6 +28,12 @@ export interface UsersServiceProps {
      * @default "<html><body><p>Your secret login code:</p><h3>$secretCode</h3></body></html>"
      */
     readonly messageHtml?: string;
+    /**
+     * Configure a custom domain.
+     *
+     * @default - no domain mapping configured
+     */
+    readonly customDomain?: CustomDomain;
 }
 /**
  * @summary The UsersService class.

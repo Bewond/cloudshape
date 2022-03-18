@@ -1,5 +1,6 @@
 import * as gateway from "@aws-cdk/aws-apigatewayv2-alpha";
 import * as integrations from "@aws-cdk/aws-apigatewayv2-integrations-alpha";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import type * as lambda from "aws-cdk-lib/aws-lambda";
 import type { Construct } from "constructs";
 
@@ -36,6 +37,25 @@ export interface APIRoute {
   readonly authorizer?: gateway.IHttpRouteAuthorizer;
 }
 
+export interface CustomDomain {
+  /**
+   * The domain name.
+   */
+  readonly name: string;
+
+  /**
+   * Domain certificate ARN.
+   */
+  readonly certificateArn: string;
+
+  /**
+   * API mapping path.
+   *
+   * @default - root path
+   */
+  readonly path?: string;
+}
+
 /**
  * The properties for the API construct.
  */
@@ -64,7 +84,7 @@ export interface APIProps {
   /**
    * Default Authorizer to applied to all routes.
    *
-   * @default - No authorizer
+   * @default - no authorizer
    */
   readonly defaultAuthorizer?: gateway.IHttpRouteAuthorizer;
 }
@@ -107,6 +127,27 @@ export class API extends gateway.HttpApi {
       path: route.path,
       methods: [route.method],
       integration: integration,
+    });
+  }
+
+  /**
+   * Configure a custom domain.
+   */
+  customDomain(domain: CustomDomain): void {
+    const domainName = new gateway.DomainName(this, `${this.id}DomainName`, {
+      domainName: domain.name,
+      certificate: acm.Certificate.fromCertificateArn(
+        this,
+        `${this.id}DomainCertificate`,
+        domain.certificateArn
+      ),
+    });
+
+    this.addStage(`$default`, {
+      domainMapping: {
+        domainName: domainName,
+        mappingKey: domain.path ?? "",
+      },
     });
   }
 }

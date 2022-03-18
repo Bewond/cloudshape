@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.API = exports.noneAuthorizer = exports.HttpMethod = void 0;
 const gateway = __importStar(require("@aws-cdk/aws-apigatewayv2-alpha"));
 const integrations = __importStar(require("@aws-cdk/aws-apigatewayv2-integrations-alpha"));
+const acm = __importStar(require("aws-cdk-lib/aws-certificatemanager"));
 /**
  * Supported HTTP methods.
  */
@@ -57,6 +58,21 @@ class API extends gateway.HttpApi {
             path: route.path,
             methods: [route.method],
             integration: integration,
+        });
+    }
+    /**
+     * Configure a custom domain.
+     */
+    customDomain(domain) {
+        const domainName = new gateway.DomainName(this, `${this.id}DomainName`, {
+            domainName: domain.name,
+            certificate: acm.Certificate.fromCertificateArn(this, `${this.id}DomainCertificate`, domain.certificateArn),
+        });
+        this.addStage(`$default`, {
+            domainMapping: {
+                domainName: domainName,
+                mappingKey: domain.path ?? "",
+            },
         });
     }
 }

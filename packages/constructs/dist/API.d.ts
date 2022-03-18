@@ -28,6 +28,22 @@ export interface APIRoute {
      */
     readonly authorizer?: gateway.IHttpRouteAuthorizer;
 }
+export interface CustomDomain {
+    /**
+     * The domain name.
+     */
+    readonly name: string;
+    /**
+     * Domain certificate ARN.
+     */
+    readonly certificateArn: string;
+    /**
+     * API mapping path.
+     *
+     * @default - root path
+     */
+    readonly path?: string;
+}
 /**
  * The properties for the API construct.
  */
@@ -53,7 +69,7 @@ export interface APIProps {
     /**
      * Default Authorizer to applied to all routes.
      *
-     * @default - No authorizer
+     * @default - no authorizer
      */
     readonly defaultAuthorizer?: gateway.IHttpRouteAuthorizer;
 }
@@ -74,5 +90,9 @@ export declare class API extends gateway.HttpApi {
      * Add API route.
      */
     addRoute(route: APIRoute): void;
+    /**
+     * Configure a custom domain.
+     */
+    customDomain(domain: CustomDomain): void;
 }
 //# sourceMappingURL=API.d.ts.map
