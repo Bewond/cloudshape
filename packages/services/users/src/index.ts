@@ -45,9 +45,9 @@ export interface UsersServiceProps {
   /**
    * Configure a custom domain.
    *
-   * @default - no domain mapping configured
+   * @default - no domain mapping
    */
-  readonly customDomain?: Omit<CustomDomain, "path">;
+  readonly customDomain?: CustomDomain;
 }
 
 /**
@@ -69,14 +69,7 @@ export class UsersService extends Construct {
       authFlows: { custom: true },
     });
 
-    const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
-
-    if (props.customDomain) {
-      authAPI.customDomainStage({
-        ...props.customDomain,
-        path: "users",
-      });
-    }
+    const authAPI = this.setupAPI(props, authUserPool, authUserPoolClient);
 
     new Output(this, "apiEndpoint", {
       value: authAPI.apiEndpoint,
@@ -84,8 +77,15 @@ export class UsersService extends Construct {
     });
   }
 
-  private setupAPI(authPool: Auth, authClient: UserPoolClient): API {
-    const authAPI = new API(this, "authAPI");
+  private setupAPI(props: UsersServiceProps, authPool: Auth, authClient: UserPoolClient): API {
+    const authAPI = new API(this, "authAPI", {
+      ...(props.customDomain && {
+        defaultDomainMapping: {
+          domainName: props.customDomain,
+          mappingKey: "users",
+        },
+      }),
+    });
 
     /*const authorizer = authPool.createAuthorizer({
       userPoolClients: [authClient],

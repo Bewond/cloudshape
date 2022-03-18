@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.API = exports.noneAuthorizer = exports.HttpMethod = void 0;
+exports.CustomDomain = exports.API = exports.noneAuthorizer = exports.HttpMethod = void 0;
 const gateway = __importStar(require("@aws-cdk/aws-apigatewayv2-alpha"));
 const integrations = __importStar(require("@aws-cdk/aws-apigatewayv2-integrations-alpha"));
 const acm = __importStar(require("aws-cdk-lib/aws-certificatemanager"));
@@ -46,13 +46,12 @@ class API extends gateway.HttpApi {
             apiName: props.name ?? id,
             corsPreflight: props.cors ?? { allowOrigins: ["*"] },
         });
-        this.id = id;
     }
     /**
      * Add API route.
      */
     addRoute(route) {
-        const integration = new integrations.HttpLambdaIntegration(`${this.id}RouteIntegration`, route.handler);
+        const integration = new integrations.HttpLambdaIntegration(`${this.httpApiName}RouteIntegration`, route.handler);
         this.addRoutes({
             ...route,
             path: route.path,
@@ -60,23 +59,15 @@ class API extends gateway.HttpApi {
             integration: integration,
         });
     }
-    /**
-     * Configure a custom domain.
-     */
-    customDomainStage(domain) {
-        const domainName = new gateway.DomainName(this, `${this.id}DomainName`, {
-            domainName: domain.name,
-            certificate: acm.Certificate.fromCertificateArn(this, `${this.id}DomainCertificate`, domain.certificateArn),
-        });
-        this.addStage(`${this.id}DomainStage`, {
-            stageName: domain.path ?? "root",
-            autoDeploy: true,
-            domainMapping: {
-                domainName: domainName,
-                mappingKey: domain.path ?? "",
-            },
+}
+exports.API = API;
+class CustomDomain extends gateway.DomainName {
+    constructor(scope, id, props) {
+        super(scope, id, {
+            domainName: props.name,
+            certificate: acm.Certificate.fromCertificateArn(scope, `${id}DomainCertificate`, props.certificateArn),
         });
     }
 }
-exports.API = API;
+exports.CustomDomain = CustomDomain;
 //# sourceMappingURL=API.js.map

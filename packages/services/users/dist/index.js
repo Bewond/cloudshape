@@ -43,20 +43,21 @@ class UsersService extends constructs_2.Construct {
         const authUserPoolClient = authUserPool.addClient("authUserPoolClient", {
             authFlows: { custom: true },
         });
-        const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
-        if (props.customDomain) {
-            authAPI.customDomainStage({
-                ...props.customDomain,
-                path: "users",
-            });
-        }
+        const authAPI = this.setupAPI(props, authUserPool, authUserPoolClient);
         new constructs_1.Output(this, "apiEndpoint", {
             value: authAPI.apiEndpoint,
             description: "Auth Service apiEndpoint",
         });
     }
-    setupAPI(authPool, authClient) {
-        const authAPI = new constructs_1.API(this, "authAPI");
+    setupAPI(props, authPool, authClient) {
+        const authAPI = new constructs_1.API(this, "authAPI", {
+            ...(props.customDomain && {
+                defaultDomainMapping: {
+                    domainName: props.customDomain,
+                    mappingKey: "users",
+                },
+            }),
+        });
         /*const authorizer = authPool.createAuthorizer({
           userPoolClients: [authClient],
         });*/

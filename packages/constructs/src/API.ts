@@ -11,7 +11,7 @@ import type { Construct } from "constructs";
 export import HttpMethod = gateway.HttpMethod;
 
 /**
- * Route properties for API Gateway.
+ * Route data for API Gateway.
  */
 export interface APIRoute {
   /**
@@ -37,27 +37,8 @@ export interface APIRoute {
   readonly authorizer?: gateway.IHttpRouteAuthorizer;
 }
 
-export interface CustomDomain {
-  /**
-   * The domain name.
-   */
-  readonly name: string;
-
-  /**
-   * Domain certificate ARN.
-   */
-  readonly certificateArn: string;
-
-  /**
-   * API mapping path.
-   *
-   * @default - root path
-   */
-  readonly path?: string;
-}
-
 /**
- * The properties for the API construct.
+ * Properties for the API construct.
  */
 export interface APIProps {
   /**
@@ -82,6 +63,13 @@ export interface APIProps {
   readonly cors?: gateway.CorsPreflightOptions;
 
   /**
+   * Configure a custom domain.
+   *
+   * @default - no domain mapping
+   */
+  readonly defaultDomainMapping?: gateway.DomainMappingOptions;
+
+  /**
    * Default Authorizer to applied to all routes.
    *
    * @default - no authorizer
@@ -98,19 +86,12 @@ export const noneAuthorizer = new gateway.HttpNoneAuthorizer();
  * @summary API gateway construct.
  */
 export class API extends gateway.HttpApi {
-  /**
-   * Scope-unique constructor id.
-   */
-  private readonly id: string;
-
   constructor(scope: Construct, id: string, props: APIProps = {}) {
     super(scope, id, {
       ...props,
       apiName: props.name ?? id,
       corsPreflight: props.cors ?? { allowOrigins: ["*"] },
     });
-
-    this.id = id;
   }
 
   /**
@@ -118,7 +99,7 @@ export class API extends gateway.HttpApi {
    */
   addRoute(route: APIRoute): void {
     const integration = new integrations.HttpLambdaIntegration(
-      `${this.id}RouteIntegration`,
+      `${this.httpApiName}RouteIntegration`,
       route.handler
     );
 
@@ -129,27 +110,32 @@ export class API extends gateway.HttpApi {
       integration: integration,
     });
   }
+}
+
+/**
+ * Properties for the CustomDomain construct.
+ */
+export interface CustomDomainProps {
+  /**
+   * The domain name.
+   */
+  readonly name: string;
 
   /**
-   * Configure a custom domain.
+   * Domain certificate ARN.
    */
-  customDomainStage(domain: CustomDomain): void {
-    const domainName = new gateway.DomainName(this, `${this.id}DomainName`, {
-      domainName: domain.name,
-      certificate: acm.Certificate.fromCertificateArn(
-        this,
-        `${this.id}DomainCertificate`,
-        domain.certificateArn
-      ),
-    });
+  readonly certificateArn: string;
+}
 
-    this.addStage(`${this.id}DomainStage`, {
-      stageName: domain.path ?? "root",
-      autoDeploy: true,
-      domainMapping: {
-        domainName: domainName,
-        mappingKey: domain.path ?? "",
-      },
+export class CustomDomain extends gateway.DomainName {
+  constructor(scope: Construct, id: string, props: CustomDomainProps) {
+    super(scope, id, {
+      domainName: props.name,
+      certificate: acm.Certificate.fromCertificateArn(
+        scope,
+        `${id}DomainCertificate`,
+        props.certificateArn
+      ),
     });
   }
 }

@@ -6,7 +6,7 @@ import type { Construct } from "constructs";
  */
 export import HttpMethod = gateway.HttpMethod;
 /**
- * Route properties for API Gateway.
+ * Route data for API Gateway.
  */
 export interface APIRoute {
     /**
@@ -28,24 +28,8 @@ export interface APIRoute {
      */
     readonly authorizer?: gateway.IHttpRouteAuthorizer;
 }
-export interface CustomDomain {
-    /**
-     * The domain name.
-     */
-    readonly name: string;
-    /**
-     * Domain certificate ARN.
-     */
-    readonly certificateArn: string;
-    /**
-     * API mapping path.
-     *
-     * @default - root path
-     */
-    readonly path?: string;
-}
 /**
- * The properties for the API construct.
+ * Properties for the API construct.
  */
 export interface APIProps {
     /**
@@ -67,6 +51,12 @@ export interface APIProps {
      */
     readonly cors?: gateway.CorsPreflightOptions;
     /**
+     * Configure a custom domain.
+     *
+     * @default - no domain mapping
+     */
+    readonly defaultDomainMapping?: gateway.DomainMappingOptions;
+    /**
      * Default Authorizer to applied to all routes.
      *
      * @default - no authorizer
@@ -81,18 +71,26 @@ export declare const noneAuthorizer: gateway.HttpNoneAuthorizer;
  * @summary API gateway construct.
  */
 export declare class API extends gateway.HttpApi {
-    /**
-     * Scope-unique constructor id.
-     */
-    private readonly id;
     constructor(scope: Construct, id: string, props?: APIProps);
     /**
      * Add API route.
      */
     addRoute(route: APIRoute): void;
+}
+/**
+ * Properties for the CustomDomain construct.
+ */
+export interface CustomDomainProps {
     /**
-     * Configure a custom domain.
+     * The domain name.
      */
-    customDomainStage(domain: CustomDomain): void;
+    readonly name: string;
+    /**
+     * Domain certificate ARN.
+     */
+    readonly certificateArn: string;
+}
+export declare class CustomDomain extends gateway.DomainName {
+    constructor(scope: Construct, id: string, props: CustomDomainProps);
 }
 //# sourceMappingURL=API.d.ts.map

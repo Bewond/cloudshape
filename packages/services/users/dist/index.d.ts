@@ -31,9 +31,9 @@ export interface UsersServiceProps {
     /**
      * Configure a custom domain.
      *
-     * @default - no domain mapping configured
+     * @default - no domain mapping
      */
-    readonly customDomain?: Omit<CustomDomain, "path">;
+    readonly customDomain?: CustomDomain;
 }
 /**
  * @summary The UsersService class.
