@@ -63,12 +63,14 @@ class API extends gateway.HttpApi {
     /**
      * Configure a custom domain.
      */
-    customDomain(domain) {
+    customDomainStage(domain) {
         const domainName = new gateway.DomainName(this, `${this.id}DomainName`, {
             domainName: domain.name,
             certificate: acm.Certificate.fromCertificateArn(this, `${this.id}DomainCertificate`, domain.certificateArn),
         });
         this.addStage(`${this.id}DomainStage`, {
+            stageName: domain.path ?? "root",
+            autoDeploy: true,
             domainMapping: {
                 domainName: domainName,
                 mappingKey: domain.path ?? "",

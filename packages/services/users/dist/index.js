@@ -45,7 +45,7 @@ class UsersService extends constructs_2.Construct {
         });
         const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
         if (props.customDomain) {
-            authAPI.customDomain({
+            authAPI.customDomainStage({
                 ...props.customDomain,
                 path: "users",
             });

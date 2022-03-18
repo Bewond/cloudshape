@@ -72,7 +72,7 @@ export class UsersService extends Construct {
     const authAPI = this.setupAPI(authUserPool, authUserPoolClient);
 
     if (props.customDomain) {
-      authAPI.customDomain({
+      authAPI.customDomainStage({
         ...props.customDomain,
         path: "users",
       });

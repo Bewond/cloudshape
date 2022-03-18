@@ -93,6 +93,6 @@ export declare class API extends gateway.HttpApi {
     /**
      * Configure a custom domain.
      */
-    customDomain(domain: CustomDomain): void;
+    customDomainStage(domain: CustomDomain): void;
 }
 //# sourceMappingURL=API.d.ts.map
