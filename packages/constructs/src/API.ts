@@ -143,7 +143,7 @@ export class API extends gateway.HttpApi {
       ),
     });
 
-    this.addStage(`$default`, {
+    this.addStage(`${this.id}DomainStage`, {
       domainMapping: {
         domainName: domainName,
         mappingKey: domain.path ?? "",

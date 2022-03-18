@@ -68,7 +68,7 @@ class API extends gateway.HttpApi {
             domainName: domain.name,
             certificate: acm.Certificate.fromCertificateArn(this, `${this.id}DomainCertificate`, domain.certificateArn),
         });
-        this.addStage(`$default`, {
+        this.addStage(`${this.id}DomainStage`, {
             domainMapping: {
                 domainName: domainName,
                 mappingKey: domain.path ?? "",

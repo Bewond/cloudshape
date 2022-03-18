@@ -47,7 +47,7 @@ export interface UsersServiceProps {
    *
    * @default - no domain mapping configured
    */
-  readonly customDomain?: CustomDomain;
+  readonly customDomain?: Omit<CustomDomain, "path">;
 }
 
 /**
@@ -74,7 +74,7 @@ export class UsersService extends Construct {
     if (props.customDomain) {
       authAPI.customDomain({
         ...props.customDomain,
-        path: props.customDomain.path ?? "users",
+        path: "users",
       });
     }
 

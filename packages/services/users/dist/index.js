@@ -47,7 +47,7 @@ class UsersService extends constructs_2.Construct {
         if (props.customDomain) {
             authAPI.customDomain({
                 ...props.customDomain,
-                path: props.customDomain.path ?? "users",
+                path: "users",
             });
         }
         new constructs_1.Output(this, "apiEndpoint", {
