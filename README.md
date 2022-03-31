@@ -45,14 +45,14 @@ There are currently over 2+ integration templates available:
 
 [Core](https://github.com/Bewond/cloudshape/tree/main/packages/core) package contains some functions that are primarily useful for building AWS Lambda-based serverless applications such as JSON schema validation and API event flow management.
 
-# Getting Started ⚙️
+## Getting Started ⚙️
 
 TODO
 
-# Contributing ❤️
+## Contributing ❤️
 
 TODO
 
-# License
+## License
 
 Copyright 2022 Bewond Software - Released under [Apache License 2.0](https://github.com/Bewond/cloudshape/blob/main/LICENSE)
